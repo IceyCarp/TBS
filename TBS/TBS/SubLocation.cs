@@ -260,6 +260,13 @@ public class SubLocation
                     have += mat.amount;
                 }
             }
+            foreach (var mat in Program.player.ownedItems)
+            {
+                if (mat.name == cost.Material.name)
+                {
+                    have += mat.amount;
+                }
+            }
             if (have < cost.Quantity) return false;
         }
 
@@ -288,6 +295,21 @@ public class SubLocation
                 if (mat.amount <= 0)
                 {
                     Program.player.materialItems.RemoveAt(i);
+                    i--;
+                }
+            }
+            for (int i = 0; i < Program.player.ownedItems.Count && remaining > 0; i++)
+            {
+                var mat = Program.player.ownedItems[i];
+                if (mat.name != cost.Material.name) continue;
+
+                int take = Math.Min(mat.amount, remaining);
+                mat.amount -= take;
+                remaining -= take;
+
+                if (mat.amount <= 0)
+                {
+                    Program.player.ownedItems.RemoveAt(i);
                     i--;
                 }
             }
