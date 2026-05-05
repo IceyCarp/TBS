@@ -217,6 +217,13 @@ public class SubLocation
                             have += mat.amount;
                         }
                     }
+                    foreach (var mat in Program.player.ownedItems)
+                    {
+                        if (mat.name == mc.Material.name)
+                        {
+                            have += mat.amount;
+                        }
+                    }
                     string status = have >= mc.Quantity ? "[✓]" : "[X]";
                     MainUI.WriteInMainArea($"  {status} {mc.Quantity}x {mc.Material.name} (You have: {have})");
                 }
