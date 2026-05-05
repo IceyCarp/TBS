@@ -542,10 +542,6 @@ public class SubLocation
                 Inventory.RemoveEffects(selectedItem, null); // Remove stats for the whole stack
             }
 
-            // Handle Weight & Speed 
-            Inventory.UpdateWeight();
-
-
             // Handle Item List
             if (selectedItem.type == ItemType.Equipment || selectedItem.amount <= quantity)
             {
@@ -557,6 +553,9 @@ public class SubLocation
                 // Just subtract the amount
                 selectedItem.amount -= quantity;
             }
+
+            // Handle Weight & Speed 
+            Inventory.UpdateWeight();
 
             // Re-apply artifact stats if some items are left
             if (selectedItem.type == ItemType.Artifact && Program.player.ownedItems.Contains(selectedItem))
