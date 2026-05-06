@@ -111,6 +111,11 @@ public class Player : Combatant
         stun         = baseStun         + c.Tstun         * levelsAbove1;
         stunNegation = baseStunNegation + c.TstunNegation * levelsAbove1;
         luck         = baseLuck         + c.Tluck         * levelsAbove1;
+        
+        if(c.extraStat != null)
+        {
+            SetStat(c.extraStat, (int)(c.extraStatIncrease.Value*levelsAbove1));
+        }
 
         foreach (Item item in ownedItems)
         {

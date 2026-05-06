@@ -25,15 +25,18 @@ public class Class
     public int TcritDamage = 0;
     public int Tstun = 0;
     public int TstunNegation = 0;
-    public int Tluck  = 0; 
+    public int Tluck  = 0;
+
+    public string? extraStat = null;
+    public float? extraStatIncrease = null;
 
     public Class() { }//never forget😔
     public Class(string name)
     {
         this.name = name;
     }
-
-    public void LevelupStats()
+    
+    public void LevelupStats()//isnt in use anymore
     {
         Program.player.HP += this.THP;
         Program.player.maxHP += this.TmaxHP;

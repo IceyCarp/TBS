@@ -5,8 +5,10 @@
 
     public static readonly Class Necromancer = new Class("Necromancer")
     {
-        description = "Can raise undead from the graveyard to join their party.",
-        roles = ClassRole.Magic
+        description = "Can raise undead from the graveyard to join their party. \nyou can command one dead for each of 10 levels",
+        roles = ClassRole.Magic,
+        extraStat = "CommandDeadSlots",
+        extraStatIncrease = 0.1f
     };
 
     public static readonly Class Zoologist = new Class("Zoologist")

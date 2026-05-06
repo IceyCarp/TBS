@@ -1565,18 +1565,57 @@ public class SubLocation
 
         if (Program.player.IsAlive())
         {
-            CombatUI ui = new CombatUI();
-            ui.AddToLog("");
-            ui.AddToLog($"You have defeated the spirit of {deadPlayer.name}!");
-            ui.AddToLog("Their soul has been laid to rest...");
-            ui.RenderCombatScreen(Program.player, new List<Combatant> { Program.player });
+            MainUI.ClearMainArea();
+
+            MainUI.RenderMainMenuScreen(Program.player);
+
+            //CombatUI ui = new CombatUI();
+            MainUI.WriteInMainArea("");
+            MainUI.WriteInMainArea($"You have defeated the spirit of {deadPlayer.name}!");
+            MainUI.WriteInMainArea("Their soul has been laid to rest...");
 
             Program.player.IncrementStat("totalCorpesKilled");
+
+            if(Program.player.playerClass.name == ClassLibrary.Necromancer.name)
+            {
+                var companions = CompanionSystem.GetCompanions(Program.player);
+
+                if (Program.player.GetStat("CommandDeadSlots") > companions.Count)
+                {
+                    MainUI.WriteInMainArea($"you've got space to clam anouther soul for your horde\ndo you wish to take {deadPlayer.name} as a soldier? (y/n)");
+                    string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+
+                    if (choice == "y" || choice == "yes")
+                    {
+                        MainUI.WriteInMainArea($"You take {deadPlayer.name} into your army \nthey will be of great help in combat");
+
+                        companions.Add(ConvertPlayerToEnemy(deadPlayer));
+                        CompanionSystem.SaveCompanions(Program.player, companions);
+
+                        MainUI.WriteInMainArea($"{deadPlayer.name} has joined your party!");
+
+                    }
+                    else if (choice == "n" || choice == "no")
+                    {
+                        MainUI.WriteInMainArea($"{deadPlayer.name} lets out a sigh and disspears clearly grateful for your decision");
+
+                    }
+                    else
+                    {
+                        MainUI.WriteInMainArea("the dead don't speak spanish, tell them yes or no next time");
+
+                    }
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("your army is full you cannot claim this soul");
+                }
+            }
 
             Program.db.DeleteDeadPlayer(deadPlayer.name);
             
             Thread.Sleep(2000);
-            Console.WriteLine("\nPress Enter to continue...");
+            MainUI.WriteInMainArea("\nPress Enter to continue...");
             Console.ReadLine();
             
             Program.MainMenu();
@@ -2049,7 +2088,7 @@ public class SubLocation
             return;
 
         }
-        else if (Program.player.playerClass != ClassLibrary.Necromancer)
+        else if (Program.player.playerClass.name != ClassLibrary.Necromancer.name)
         {
             MainUI.WriteInMainArea("you stare upon the large stone door of the crypt \nIt seems oddly familliar to you \nyou move in to open it...\n" +
                 "upon touching it you immediately feel a sharp pain\nas your soul is ripped from your body \ndecending through the door into the crypt\n ");
@@ -2065,6 +2104,8 @@ public class SubLocation
                     "\nyou've come to look a lot like the corpses from the graveyards");
 
                 Program.player.playerClass = ClassLibrary.Necromancer;
+                Program.player.RecalculateStats();
+
                 Program.SavePlayer();
 
                 MainUI.WriteInMainArea("Press enter for main menu..");
@@ -2093,6 +2134,15 @@ public class SubLocation
                 return;
             }
 
+        }
+        else
+        {
+            MainUI.WriteInMainArea("you've done all you ought to do here");
+
+            MainUI.WriteInMainArea("Press enter for main menu..");
+            Console.ReadLine();
+            Program.MainMenu();
+            return;
         }
 
 
