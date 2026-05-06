@@ -12,7 +12,7 @@ public enum SubLocationType
     marketplace,
     tavern,//no--
     blacksmith,
-    arena,//no--
+    arena,
     bank,
     casino,
     wilderness,
@@ -94,8 +94,9 @@ public class SubLocation
         
         if(type == SubLocationType.marketplace) MarketplaceLogic();
 
-        if (type == SubLocationType.mine) MineLogic();
+        if (type == SubLocationType.arena) TrainingGroundsLogic();
 
+        if (type == SubLocationType.mine) MineLogic();
 
         if (type == SubLocationType.crypt) CryptLogic();
 
@@ -2151,6 +2152,306 @@ public class SubLocation
 
     #endregion
 
+    #region trainingGrounds
+
+    void TrainingGroundsLogic()
+    {
+        MainUI.ClearMainArea();
+        MainUI.WriteInMainArea("=== Training Grounds ===");
+        MainUI.WriteInMainArea("");
+        MainUI.WriteInMainArea("A weathered man sits on a crate at the edge of a dusty fighting pit.");
+        MainUI.WriteInMainArea("He looks you over slowly.");
+        MainUI.WriteInMainArea("");
+        MainUI.WriteInMainArea("1 : Talk to him");
+        MainUI.WriteInMainArea("0 : Leave");
+
+        if (!int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out int choice) || choice < 0 || choice > 1)
+        {
+            MainUI.ClearMainArea();
+            TrainingGroundsLogic();
+            return;
+        }
+
+        if (choice == 0)
+        {
+            MainUI.ClearMainArea();
+            Program.MainMenu();
+            return;
+        }
+
+        Player player = Program.player;
+        int gritWins = player.GetStat("totalGritVictories");
+        bool isBrawler = player.playerClass == ClassLibrary.Brawler;
+
+        MainUI.ClearMainArea();
+        MainUI.WriteInMainArea("=== Kael ===");
+        MainUI.WriteInMainArea("");
+
+        if (!isBrawler)
+        {
+            if (gritWins == 0)
+            {
+                MainUI.WriteInMainArea("\"You haven't taken a real hit in your life, have you.\"");
+                MainUI.WriteInMainArea("\"Come back when the world's knocked you around a bit.\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("Press Enter to leave...");
+                Console.ReadLine();
+                Program.MainMenu();
+                return;
+            }
+            else if (gritWins < 5)
+            {
+                MainUI.WriteInMainArea("\"You're starting to get it. You've been in some real scraps.\"");
+                MainUI.WriteInMainArea("\"But I need more from you before I waste my time.\"");
+                MainUI.WriteInMainArea($"\"Come back when you've proven yourself further. ({gritWins}/5 grit victories)\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("Press Enter to leave...");
+                Console.ReadLine();
+                Program.MainMenu();
+                return;
+            }
+            else
+            {
+                MainUI.WriteInMainArea("\"Alright. You've taken your hits and kept moving.\"");
+                MainUI.WriteInMainArea("\"That tells me something. Let's see what you're actually made of.\"");
+                MainUI.WriteInMainArea("\"Step into the pit. I'll go easy on you. Mostly.\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("1 : Fight Kael");
+                MainUI.WriteInMainArea("0 : Not right now");
+
+                if (!int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out int fightChoice) || fightChoice == 0)
+                {
+                    MainUI.ClearMainArea();
+                    Program.MainMenu();
+                    return;
+                }
+
+                Enemy kael = BuildKael(0);
+                CombatManager combat = new CombatManager(player, new List<Enemy> { kael }, false, null);
+                combat.StartCombat();
+
+                if (player.IsAlive())
+                {
+                    if (kael.HP <= 0)
+                    {
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael lets out a slow breath and nods.");
+                        MainUI.WriteInMainArea("\"Not bad. You hit like you mean it.\"");
+                        MainUI.WriteInMainArea("\"The Brawler's way isn't about armor or tricks.\"");
+                        MainUI.WriteInMainArea("\"It's about taking everything they throw at you and hitting back harder.\"");
+                        MainUI.WriteInMainArea("\"You've got that. Class is yours if you want it.\"");
+                        MainUI.WriteInMainArea("");
+                        MainUI.WriteInMainArea("Become a Brawler? (y/n): ");
+
+                        string classChoice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+                        if (classChoice == "y")
+                        {
+                            player.playerClass = ClassLibrary.Brawler;
+                            player.RecalculateStats();
+                            MainUI.WriteInMainArea("");
+                            MainUI.WriteInMainArea("\"Welcome to the pit. You're a Brawler now.\"");
+                            Program.SavePlayer();
+                        }
+                        else
+                        {
+                            MainUI.WriteInMainArea("\"Suit yourself. I'll be here.\"");
+                        }
+                    }
+                    else
+                    {
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael catches you with a heavy hand and holds you upright.");
+                        MainUI.WriteInMainArea("\"You're tough. But not yet.\"");
+                        MainUI.WriteInMainArea("\"Come back when you've hardened up more.\"");
+                    }
+
+                    MainUI.WriteInMainArea("");
+                    MainUI.WriteInMainArea("Press Enter to continue...");
+                    Console.ReadLine();
+                }
+
+                Program.MainMenu();
+                return;
+            }
+        }
+        else
+        {
+            bool knowsIronFist = player.ownedAttacks.Contains(AttackLibrary.IronFist);
+            bool knowsHaymaker = player.ownedAttacks.Contains(AttackLibrary.Haymaker);
+
+            if (!knowsIronFist)
+            {
+                if (gritWins < 10)
+                {
+                    MainUI.WriteInMainArea("\"You're back. Good.\"");
+                    MainUI.WriteInMainArea("\"Get more real fights behind you and come find me again.\"");
+                    MainUI.WriteInMainArea($"\"({gritWins}/10 grit victories)\"");
+                    MainUI.WriteInMainArea("");
+                    MainUI.WriteInMainArea("Press Enter to leave...");
+                    Console.ReadLine();
+                    Program.MainMenu();
+                    return;
+                }
+
+                MainUI.WriteInMainArea("\"10 real fights. You've earned another round with me.\"");
+                MainUI.WriteInMainArea("\"Win and I'll teach you something.\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("1 : Fight Kael");
+                MainUI.WriteInMainArea("0 : Not right now");
+
+                if (!int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out int fightChoice1) || fightChoice1 == 0)
+                {
+                    MainUI.ClearMainArea();
+                    Program.MainMenu();
+                    return;
+                }
+
+                Enemy kael1 = BuildKael(1);
+                CombatManager combat1 = new CombatManager(player, new List<Enemy> { kael1 }, false, null);
+                combat1.StartCombat();
+
+                if (player.IsAlive())
+                {
+                    if (kael1.HP <= 0)
+                    {
+                        player.IncrementStat("kaelFightsWon");
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael rolls his shoulder and grins.");
+                        MainUI.WriteInMainArea("\"Alright. Here's what I know about breaking someone down.\"");
+                        MainUI.WriteInMainArea("\"Iron Fist. Hit the same spot twice and the third time they won't get back up.\"");
+                        AttackManager atkManager = new AttackManager(player);
+                        atkManager.LearnAttack(AttackLibrary.IronFist);
+                        Program.SavePlayer();
+                    }
+                    else
+                    {
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael shakes his head slowly.");
+                        MainUI.WriteInMainArea("\"More work to do. Come back when you're ready.\"");
+                    }
+
+                    MainUI.WriteInMainArea("");
+                    MainUI.WriteInMainArea("Press Enter to continue...");
+                    Console.ReadLine();
+                }
+
+                Program.MainMenu();
+                return;
+            }
+            else if (!knowsHaymaker)
+            {
+                if (gritWins < 20 || player.level < 10)
+                {
+                    MainUI.WriteInMainArea("\"You've come a long way.\"");
+                    MainUI.WriteInMainArea("\"But I've still got one more thing to teach. You're not ready for it yet.\"");
+                    MainUI.WriteInMainArea($"\"(Level {player.level}/10, {gritWins}/20 grit victories)\"");
+                    MainUI.WriteInMainArea("");
+                    MainUI.WriteInMainArea("Press Enter to leave...");
+                    Console.ReadLine();
+                    Program.MainMenu();
+                    return;
+                }
+
+                MainUI.WriteInMainArea("\"You've grown. I can see it.\"");
+                MainUI.WriteInMainArea("\"One more fight. This time I won't hold back much.\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("1 : Fight Kael");
+                MainUI.WriteInMainArea("0 : Not right now");
+
+                if (!int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out int fightChoice2) || fightChoice2 == 0)
+                {
+                    MainUI.ClearMainArea();
+                    Program.MainMenu();
+                    return;
+                }
+
+                Enemy kael2 = BuildKael(2);
+                CombatManager combat2 = new CombatManager(player, new List<Enemy> { kael2 }, false, null);
+                combat2.StartCombat();
+
+                if (player.IsAlive())
+                {
+                    if (kael2.HP <= 0)
+                    {
+                        player.IncrementStat("kaelFightsWon");
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael sits down hard, breathing heavy. First time you've seen him winded.");
+                        MainUI.WriteInMainArea("\"That's it. That's the last thing I've got to teach you.\"");
+                        MainUI.WriteInMainArea("\"The Haymaker. Everything you've got in one swing.\"");
+                        MainUI.WriteInMainArea("\"You'll be slow after. Make it count.\"");
+                        AttackManager atkManager = new AttackManager(player);
+                        atkManager.LearnAttack(AttackLibrary.Haymaker);
+                        Program.SavePlayer();
+                    }
+                    else
+                    {
+                        MainUI.ClearMainArea();
+                        MainUI.WriteInMainArea("Kael dusts himself off.");
+                        MainUI.WriteInMainArea("\"Not yet. Keep at it.\"");
+                    }
+
+                    MainUI.WriteInMainArea("");
+                    MainUI.WriteInMainArea("Press Enter to continue...");
+                    Console.ReadLine();
+                }
+
+                Program.MainMenu();
+                return;
+            }
+            else
+            {
+                MainUI.WriteInMainArea("\"You've learned everything I know.\"");
+                MainUI.WriteInMainArea("\"Keep swinging.\"");
+                MainUI.WriteInMainArea("");
+                MainUI.WriteInMainArea("Press Enter to leave...");
+                Console.ReadLine();
+                Program.MainMenu();
+            }
+        }
+    }
+
+    Enemy BuildKael(int tier)
+    {
+        int hp, armor, speed;
+        List<Attack> attacks;
+
+        switch (tier)
+        {
+            case 1:
+                hp = 120; armor = 5; speed = 12;
+                attacks = new List<Attack> { AttackLibrary.HeavySlam, AttackLibrary.ThrowHands };
+                break;
+            case 2:
+                hp = 200; armor = 10; speed = 15;
+                attacks = new List<Attack> { AttackLibrary.HeavySlam, AttackLibrary.RecklessSwing, AttackLibrary.ThrowHands };
+                break;
+            default:
+                hp = 80; armor = 3; speed = 10;
+                attacks = new List<Attack> { AttackLibrary.ThrowHands, AttackLibrary.HeavySlam };
+                break;
+        }
+
+        return new Enemy
+        {
+            name = "Kael",
+            level = tier == 0 ? 5 : tier == 1 ? 9 : 14,
+            HP = hp,
+            maxHP = hp,
+            speed = speed,
+            armor = armor,
+            dodge = 0,
+            dodgeNegation = 5,
+            critChance = 5,
+            critDamage = 120,
+            stun = 0,
+            stunNegation = 10,
+            money = 0,
+            exp = 0,
+            attacks = attacks
+        };
+    }
+
+    #endregion
 
 
     #endregion

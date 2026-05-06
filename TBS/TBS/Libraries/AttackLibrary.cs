@@ -125,7 +125,15 @@ public static class AttackLibrary
     new AttackEffect("dodge", -30, 3, "enemy"),   
     new AttackEffect("dodgeNegation", -20, 3, "enemy")    
     });
+    public static Attack IronFist = new Attack("Iron Fist", new List<AttackEffect> {
+    new AttackEffect("damage", 15, 0, "enemy"),
+    new AttackEffect("armor", -5, 3, "enemy")
+}, ClassLibrary.Brawler);
 
+    public static Attack Haymaker = new Attack("Haymaker", new List<AttackEffect> {
+    new AttackEffect("damage", 40, 0, "enemy"),
+    new AttackEffect("speed", -6, 3, "self")
+}, ClassLibrary.Brawler);
     #endregion
 
 

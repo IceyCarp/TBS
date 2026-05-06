@@ -17,6 +17,7 @@ public class CombatManager
     private Location previousLocation;
     private bool playerFled = false;
     private bool enemyAttackedThisCombat = false;
+    private bool playerHitLow = false;
 
     public static bool playerInCombat = false;
     public static bool playerFledLastCombat = false;
@@ -153,7 +154,10 @@ public class CombatManager
             {
                 player.IncrementStat("totalFlawlessVictories");
             }
-            
+            if (playerHitLow)
+            {
+                player.IncrementStat("totalGritVictories");
+            }
             int totalMoney = enemies.Sum(e => e.money);
             int totalExp = enemies.Where(e => player.level - e.level < 5).Sum(e => e.exp);
             player.money += totalMoney;
@@ -389,41 +393,41 @@ public class CombatManager
             foreach (var effect in attack.effects)
             {
             if (effect.targetType == "allEnemies" || effect.targetType == "allAllies") continue;
-            
+
             if (effect.type == "damage")
             {
-            int before = defender.HP;
-            bool dodged, crit, stunInflicted;
-            int dmg = ComputeDamage(attacker, defender, effect.value, out dodged, out crit, out stunInflicted, out int rawBeforeArmor, out int armorApplied, out double mult);
-            if (dodged)
-            {
-            ui.AddToLog($"{defender.name} dodged the attack!");
-            ui.RenderCombatScreen(player, combatants);
-            Thread.Sleep(350);
-            continue;
-            }
-            defender.HP -= dmg;
-            int after = Math.Max(defender.HP, 0);
-            ui.AddToLog($"{defender.name} takes {dmg} damage{(crit ? " (CRIT!)" : "")} ({before} -> {after})");
-            ui.RenderCombatScreen(player, combatants);
-            Thread.Sleep(350);
-
-            // Check if this damage has a duration (DoT effect like bleed)
-            if (effect.duration > 0 && defender.damageOverTimeEffects != null)
-            {
-                defender.damageOverTimeEffects.Add(new DamageOverTimeEffect(effect.value, effect.duration, attack.name));
-                ui.AddToLog($"{defender.name} is afflicted with {attack.name} for {effect.duration} turns!");
+                Combatant damageTarget = (effect.targetType == "self") ? attacker : defender;
+                int before = damageTarget.HP;
+                bool dodged, crit, stunInflicted;
+                int dmg = ComputeDamage(attacker, damageTarget, effect.value, out dodged, out crit, out stunInflicted, out int rawBeforeArmor, out int armorApplied, out double mult);
+                if (dodged && effect.targetType != "self")
+                {
+                    ui.AddToLog($"{damageTarget.name} dodged the attack!");
+                    ui.RenderCombatScreen(player, combatants);
+                    Thread.Sleep(350);
+                    continue;
+                }
+                damageTarget.HP -= dmg;
+                int after = Math.Max(damageTarget.HP, 0);
+                ui.AddToLog($"{damageTarget.name} takes {dmg} damage{(crit ? " (CRIT!)" : "")} ({before} -> {after})");
                 ui.RenderCombatScreen(player, combatants);
-                Thread.Sleep(300);
-            }
+                Thread.Sleep(350);
 
-            if (stunInflicted)
-            {
-            stunnedTurns[defender] = Math.Max(stunnedTurns.ContainsKey(defender) ? stunnedTurns[defender] : 0, 1);
-            ui.AddToLog($"{defender.name} is stunned!");
-            ui.RenderCombatScreen(player, combatants);
-            Thread.Sleep(350);
-            }
+                if (effect.duration > 0 && damageTarget.damageOverTimeEffects != null)
+                {
+                    damageTarget.damageOverTimeEffects.Add(new DamageOverTimeEffect(effect.value, effect.duration, attack.name));
+                    ui.AddToLog($"{damageTarget.name} is afflicted with {attack.name} for {effect.duration} turns!");
+                    ui.RenderCombatScreen(player, combatants);
+                    Thread.Sleep(300);
+                }
+
+                if (stunInflicted)
+                {
+                    stunnedTurns[damageTarget] = Math.Max(stunnedTurns.ContainsKey(damageTarget) ? stunnedTurns[damageTarget] : 0, 1);
+                    ui.AddToLog($"{damageTarget.name} is stunned!");
+                    ui.RenderCombatScreen(player, combatants);
+                    Thread.Sleep(350);
+                }
             }
             else if (effect.type == "heal")
             {
@@ -1026,7 +1030,11 @@ public class CombatManager
                 if (!isCompanion)
                 {
                     enemyAttackedThisCombat = true;
+                    if (player.maxHP > 0 && player.HP <= player.maxHP * 0.3)
+                        playerHitLow = true;
                 }
+
+
                 
                 bool isAoEEnemies = chosen.effects.Any(e => e.targetType == "allEnemies");
                 bool isAoEAllies = chosen.effects.Any(e => e.targetType == "allAllies");

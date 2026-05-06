@@ -296,6 +296,10 @@ public static class LocationLibrary
         {
 
         },
+        new SubLocation("Training Grounds", SubLocationType.arena)
+        {
+            
+        },
         new SubLocation("Blacksmith", SubLocationType.blacksmith)
         {
         }
