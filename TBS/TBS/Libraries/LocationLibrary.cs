@@ -447,6 +447,85 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.DireWolfPack, 50},
         { EncounterLibrary.GoblinPack, 20}
     }, null);
+    public static Location ColdshadeForest = new Location("Coldshade forest", new System.Numerics.Vector2(-7, 0), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+        },
+        new SubLocation("Wilderness",SubLocationType.wilderness)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+        { EncounterLibrary.DireWolfPack, 50}
+
+    }, null);
+    public static Location QuietClearing = new Location("Quiet clearing", new System.Numerics.Vector2(-8, 0), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+        },
+        new SubLocation("Wilderness",SubLocationType.wilderness)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+        { EncounterLibrary.DireWolfPack, 50}
+
+    }, null);
+
+    public static Location TheWithering = new Location("The Withering", new System.Numerics.Vector2(-7, -1), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+        },
+        new SubLocation("Wilderness",SubLocationType.wilderness)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+        { EncounterLibrary.DireWolfPack, 50}
+
+    }, null);
+
+    public static Location NomadsRest = new Location("Nomad's rest", new System.Numerics.Vector2(-8, -1), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+        },
+        new SubLocation("Wilderness",SubLocationType.wilderness)
+        {
+
+        }
+    }, 
+    new Dictionary<Encounter, int>
+    {
+        { EncounterLibrary.DireWolfPack, 50}
+
+    }, null);
+
+    public static Location Wraithwood = new Location("Wraithwood", new System.Numerics.Vector2(-9, -1), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+        },
+        new SubLocation("Wilderness",SubLocationType.wilderness)
+        {
+
+        }
+    }, 
+
+    new Dictionary<Encounter, int>
+    {
+        { EncounterLibrary.DireWolfPack, 50}
+
+    }, null);
 
     #endregion
 
@@ -732,14 +811,31 @@ new Dictionary<Encounter, int>
 
     #endregion
 
+    #region "Aria"
+    public static Location NorthAriaBridge = new Location("North Aria Bridge", new System.Numerics.Vector2(-8, -2), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    #endregion
+
+
     public static List<Location> locations = new List<Location>
     {
         Maplecross, Greenhollow, Ironpeak, Mistport, MossGate, Nightreach, SilverfallRuins,
         WhisperWood, SaltmarshShore, ShattershoreCliffs, WitheredRuins, FrozenWastes,
         TundraMarch, SnowfallRidge, EternalIcefall, FrostfangCrag, Everwinter, IceboundPort,
+        SylvanVeil, SerenityPass, FaelandGlen, ElderwoodVigil, SvalbardWastes, WillowWeave,Fernshade,
 
-        //new---
-        SylvanVeil, SerenityPass, FaelandGlen, ElderwoodVigil, SvalbardWastes, WillowWeave,Fernshade
+        //new-
+        ColdshadeForest, QuietClearing, TheWithering, NomadsRest, Wraithwood, NorthAriaBridge
     };
 
     public static Dictionary<string, Location> locationMap = locations.ToDictionary(l => l.name);

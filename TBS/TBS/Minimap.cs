@@ -10,7 +10,8 @@ public static class Minimap
         { "Greenwood Territories", ConsoleColor.Green },
         { "Fallen Kingdom", ConsoleColor.DarkRed },
         { "Frostborn Dominion", ConsoleColor.Blue },
-        { "Rootbound Empire", ConsoleColor.Magenta }
+        { "Rootbound Empire", ConsoleColor.Magenta },
+        { "Aria", ConsoleColor.Red }
     };
 
     public static void DisplayMinimap(int startX, int startY, int maxContentWidth)
