@@ -1570,7 +1570,9 @@ public class SubLocation
             ui.AddToLog($"You have defeated the spirit of {deadPlayer.name}!");
             ui.AddToLog("Their soul has been laid to rest...");
             ui.RenderCombatScreen(Program.player, new List<Combatant> { Program.player });
-            
+
+            Program.player.IncrementStat("totalCorpesKilled");
+
             Program.db.DeleteDeadPlayer(deadPlayer.name);
             
             Thread.Sleep(2000);
@@ -2050,21 +2052,31 @@ public class SubLocation
         else if (Program.player.playerClass != ClassLibrary.Necromancer)
         {
             MainUI.WriteInMainArea("you stare upon the large stone door of the crypt \nIt seems oddly familliar to you \nyou move in to open it...\n" +
-                "upon touching it you immediately feel a sharp pain\nas your soul is ripped from your body and decends through the door into the crypt\n ");
+                "upon touching it you immediately feel a sharp pain\nas your soul is ripped from your body \ndecending through the door into the crypt\n ");
             MainUI.WriteInMainArea("inside you see many horrors comparable to those of hell \none stands out to you, you approach it \n\n" +
-                "-you have the power to become something great, you could command armies");
-            MainUI.WriteInMainArea("Do you wish to optain this power? (y/n)");
+                "-you have the power to become something great \nyou could command armies of us\nyou could wage war with empires for fun");
+            MainUI.WriteInMainArea("\nDo you wish to optain this power? (y/n)");
 
             string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (choice == "y" || choice == "yes")
-            { 
-                
+            {
+                MainUI.WriteInMainArea($"\nit seems pleased\n\n-good choice {Program.player.name} the dead shall answer your call");
+                MainUI.WriteInMainArea("\nyou awaken outside the crypt \nupon looking down at yourself you realise you've changed " +
+                    "\nyou've come to look a lot like the corpses from the graveyards");
 
+                Program.player.playerClass = ClassLibrary.Necromancer;
+                Program.SavePlayer();
+
+                MainUI.WriteInMainArea("Press enter for main menu..");
+                Console.ReadLine();
+                Program.MainMenu();
+                return;
 
             }
             if (choice == "n" || choice == "no")
             {
-                MainUI.WriteInMainArea("You reject the offer \nyou suddenly feel dizzy as your soul is suddenly reunited with your body outside the crypt\n")                    \"press enter for main menu...");
+                MainUI.WriteInMainArea("\nYou reject the offer \nyou suddenly feel dizzy as your soul is suddenly reunited with your body" +
+                    "\nyou find yourself outside the crypt \npress enter for main menu...");
 
                 Console.ReadLine();
                 Program.MainMenu();
@@ -2072,9 +2084,9 @@ public class SubLocation
             }
             else 
             {
-                MainUI.WriteInMainArea("your utterance or lack thereoff is seen as rejection " +
-                    "\nyou feel dizzy as your soul is suddenly reunited with your body outside the crypt\n" +
-                    "press enter for main menu...");
+                MainUI.WriteInMainArea("\nyour utterance or lack thereoff is seen as rejection " +
+                    "\nyou feel dizzy as your soul is suddenly reunited with your body\n" +
+                    "you find yourself outside the crypt \npress enter for main menu...");
 
                 Console.ReadLine();
                 Program.MainMenu();
