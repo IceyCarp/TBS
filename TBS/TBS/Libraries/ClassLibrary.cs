@@ -101,7 +101,7 @@
     {
         description = "Gains more armor & health per level.",
         roles = ClassRole.Physical,
-        TmaxHP = 7,  
+        TmaxHP = 10,  
         Tarmor = 2, 
     };
 
@@ -109,8 +109,8 @@
     {
         description = "Gains more armor & health per level.",
         roles = ClassRole.Physical,
-        TmaxHP = 7,
-        Tarmor = 2,
+        TmaxHP = 8,
+        Tarmor = 1,
     };
 
     public static readonly Class Bladeharper = new Class("Bladeharper")

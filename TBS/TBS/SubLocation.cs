@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 public enum SubLocationType
 {
+    //general
     shop,
     marketplace,
     tavern,//no--
@@ -18,7 +19,10 @@ public enum SubLocationType
     graveyard,
     pond,
     port,
-    mine
+    mine,
+
+    //specific
+    crypt
 }
 public class SubLocation
 {
@@ -79,6 +83,7 @@ public class SubLocation
             }
 
         }
+
         if (type == SubLocationType.wilderness) WildernessLogic();
         
         if (type == SubLocationType.pond) FishingLogic();
@@ -91,6 +96,8 @@ public class SubLocation
 
         if (type == SubLocationType.mine) MineLogic();
 
+
+        if (type == SubLocationType.crypt) CryptLogic();
 
 
         // not done---
@@ -122,6 +129,7 @@ public class SubLocation
 
     }
 
+    #region generalUse
 
     #region blacksmith / forge
     void BlacksmithLogic()
@@ -2017,8 +2025,73 @@ public class SubLocation
 
     #endregion
 
+    #endregion
+
+    #region specificUse
+
+    #region crypt
+
+    void CryptLogic()
+    {
+        MainUI.ClearMainArea();
+        int corpesKilled = Program.player.GetStat("totalCorpesKilled");
+
+        if(corpesKilled < 5)
+        {
+            MainUI.WriteInMainArea("you stare upon the large stone door of the crypt \na feeling of dread filling every inch your body " +
+                "\nyou swallow your emotion and try to open it \nit doesnt budge, you try everything but the door wont open for you\n" +
+                "you turn around and leave\nyou didnt wanna enter anyway\n\nPress enter for main menu..");
+
+            Console.ReadLine();
+            Program.MainMenu();
+            return;
+
+        }
+        else if (Program.player.playerClass != ClassLibrary.Necromancer)
+        {
+            MainUI.WriteInMainArea("you stare upon the large stone door of the crypt \nIt seems oddly familliar to you \nyou move in to open it...\n" +
+                "upon touching it you immediately feel a sharp pain\nas your soul is ripped from your body and decends through the door into the crypt\n ");
+            MainUI.WriteInMainArea("inside you see many horrors comparable to those of hell \none stands out to you, you approach it \n\n" +
+                "-you have the power to become something great, you could command armies");
+            MainUI.WriteInMainArea("Do you wish to optain this power? (y/n)");
+
+            string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+            if (choice == "y" || choice == "yes")
+            { 
+                
 
 
+            }
+            if (choice == "n" || choice == "no")
+            {
+                MainUI.WriteInMainArea("You reject the offer \nyou suddenly feel dizzy as your soul is suddenly reunited with your body outside the crypt\n")                    \"press enter for main menu...");
+
+                Console.ReadLine();
+                Program.MainMenu();
+                return;
+            }
+            else 
+            {
+                MainUI.WriteInMainArea("your utterance or lack thereoff is seen as rejection " +
+                    "\nyou feel dizzy as your soul is suddenly reunited with your body outside the crypt\n" +
+                    "press enter for main menu...");
+
+                Console.ReadLine();
+                Program.MainMenu();
+                return;
+            }
+
+        }
+
+
+
+    }
+
+    #endregion
+
+
+
+    #endregion
 
 
 

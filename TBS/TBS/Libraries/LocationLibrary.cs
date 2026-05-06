@@ -953,6 +953,10 @@ new Dictionary<Encounter, int>
         new SubLocation("Graveyard", SubLocationType.graveyard)
         {
 
+        },
+        new SubLocation("Crypt",SubLocationType.crypt)
+        {
+
         }
     },
     new Dictionary<Encounter, int>
