@@ -11,7 +11,8 @@ public static class Minimap
         { "Fallen Kingdom", ConsoleColor.DarkRed },
         { "Frostborn Dominion", ConsoleColor.Blue },
         { "Rootbound Empire", ConsoleColor.Magenta },
-        { "Aria", ConsoleColor.Red }
+        { "Aria", ConsoleColor.Red },
+        { "Deep Dark", ConsoleColor.DarkMagenta }
     };
 
     public static void DisplayMinimap(int startX, int startY, int maxContentWidth)

@@ -824,8 +824,143 @@ new Dictionary<Encounter, int>
 
     }, "Aria");
 
+    public static Location NorthAriaGate = new Location("North Aria Gate", new System.Numerics.Vector2(-8, -3), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location AriaMarket = new Location("Aria Market", new System.Numerics.Vector2(-9, -5), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        },
+        new SubLocation("marketplace", SubLocationType.marketplace)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location AriaCore = new Location("Aria Core", new System.Numerics.Vector2(-8, -4), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location AriaPort = new Location("Aria Port", new System.Numerics.Vector2(-7, -4), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        },
+        new SubLocation("Port", SubLocationType.port)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location AriaTower = new Location("Aria Tower", new System.Numerics.Vector2(-8, -5), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location SouthAriaGate = new Location("South Aria Gate", new System.Numerics.Vector2(-8, -6), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location VaultAria = new Location("Vault Aria", new System.Numerics.Vector2(-9, -4), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        },
+        new SubLocation("Bank", SubLocationType.bank)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
+    public static Location WestAriaGate = new Location("West Aria Gate", new System.Numerics.Vector2(-10, -4), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Aria");
+
     #endregion
 
+    #region "Deep Dark"
+
+    public static Location OssuaryCrypt = new Location("Ossuary Crypt", new System.Numerics.Vector2(-10, -1), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Deep Dark");
+
+    public static Location NecroticCatacombs = new Location("Necrotic Catacombs", new System.Numerics.Vector2(-10, 0), 0, new List<SubLocation>
+    {
+        new SubLocation("Graveyard", SubLocationType.graveyard)
+        {
+
+        }
+    },
+    new Dictionary<Encounter, int>
+    {
+
+    }, "Deep Dark");
+
+    #endregion
 
     public static List<Location> locations = new List<Location>
     {
@@ -835,7 +970,9 @@ new Dictionary<Encounter, int>
         SylvanVeil, SerenityPass, FaelandGlen, ElderwoodVigil, SvalbardWastes, WillowWeave,Fernshade,
 
         //new-
-        ColdshadeForest, QuietClearing, TheWithering, NomadsRest, Wraithwood, NorthAriaBridge
+        ColdshadeForest, QuietClearing, TheWithering, NomadsRest, Wraithwood, NorthAriaBridge, NorthAriaGate,
+        AriaMarket, AriaCore, AriaPort, AriaTower, SouthAriaGate, VaultAria, WestAriaGate, NecroticCatacombs,
+        OssuaryCrypt
     };
 
     public static Dictionary<string, Location> locationMap = locations.ToDictionary(l => l.name);

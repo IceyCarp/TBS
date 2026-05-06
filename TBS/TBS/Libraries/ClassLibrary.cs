@@ -105,6 +105,14 @@
         Tarmor = 2, 
     };
 
+    public static readonly Class Apprentice = new Class("Apprentice")
+    {
+        description = "Gains more armor & health per level.",
+        roles = ClassRole.Physical,
+        TmaxHP = 7,
+        Tarmor = 2,
+    };
+
     public static readonly Class Bladeharper = new Class("Bladeharper")
     {
         description = "Ability to dual-wield weapons.",
