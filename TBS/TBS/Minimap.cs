@@ -207,10 +207,10 @@ public static class Minimap
             if (y > 0) maxPosY = Math.Max(maxPosY, y);
         }
 
-        maxViewOffsetXNeg = Math.Abs(maxNegX) - centerCol;
-        maxViewOffsetXPos = maxPosX - centerCol;
-        maxViewOffsetYNeg = Math.Abs(maxNegY) - centerRow; 
-        maxViewOffsetYPos = maxPosY - centerRow;
+        maxViewOffsetXNeg = Math.Abs(maxNegX) - centerCol + 1;
+        maxViewOffsetXPos = maxPosX - centerCol +1;
+        maxViewOffsetYNeg = Math.Abs(maxNegY) - centerRow + 1; 
+        maxViewOffsetYPos = maxPosY - centerRow +1;
 
         maxViewOffsetXNeg = Math.Max(0, maxViewOffsetXNeg);
         maxViewOffsetXPos = Math.Max(0, maxViewOffsetXPos);
