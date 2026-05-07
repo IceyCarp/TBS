@@ -1,9 +1,11 @@
 ﻿using Game.Class;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static System.Formats.Asn1.AsnWriter;
 
 public enum SubLocationType
 {
@@ -2455,9 +2457,21 @@ public class SubLocation
 
     #endregion
 
-    #region "SwordInStone"
+    #region SwordInStone
 
-    void SwordInStoneLogic()
+    List<(string, int)> swordOptions = new List<(string, int)> { 
+        ("The sword shifts slightly", 1),
+        ("The blade vibrates in your hands", 2),
+        ("A faint hum echoes from the stone", 3),
+        ("Heat climbs up the hilt into your hands", 4),
+        ("The sword suddenly resists.",4),
+        ("Dust trickles from the crack", 1),
+        ("The humming becomes uneven", 2),
+        ("The blade feels strangely weightless", 1),
+        ("A rhythm pulses deep within the stone",3)
+    };
+
+    async Task SwordInStoneLogic()
     {
         MainUI.ClearMainArea();
         MainUI.WriteInMainArea("upon entering the clearing you lay eyes upon a sword \nit's beautiful, an almost magical aura surrounding it \n" +
@@ -2465,50 +2479,121 @@ public class SubLocation
             "all you need to do is pull it from the stone in which it resides");
         MainUI.WriteInMainArea("\nDo you attempt to pull it out? (y/n)");
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+        
+        bool hasStat = false;
+        if(Program.player.HasStat("PlayerWorthyOfSword")) hasStat = true;
 
         if (choice == "y" || choice == "yes")
         {
-            int rand = new Random().Next(1,101);
-            bool succes = false;
-            if (rand == 1) succes = true;
+            if (!hasStat)
+            {
+                int rand = new Random().Next(1, 101);
+                if (rand == 1) 
+                {
+                    Program.player.IncrementStat("PlayerWorthyOfSword");
+                    Program.player.IncrementStat("PlayerWorthyOfSword",-1);
+                    Program.SavePlayer();
+                }
+                
+            }
 
             MainUI.WriteInMainArea("You grip the hilt of the sword firmly");
 
-            if (succes)
+            if (Program.player.GetStat("PlayerWorthyOfSword") > 0)
             {
                 MainUI.WriteInMainArea("it feels natural in your hand, as if it was destined to be yours");
                 MainUI.WriteInMainArea("Press enter when you're ready to pull");
                 Console.ReadLine();
 
+                MainUI.ClearMainArea();
+
                 int fails = 0;
-                
-                while (fails > 3)
+                int successes = 0;
+
+                while (fails < 3 && successes < 10)
                 {
 
+                    MainUI.ClearMainArea();
+                    int swordChoice = new Random().Next(0,swordOptions.Count);
+                    MainUI.WriteInMainArea($"{swordOptions[swordChoice].Item1}");
+                    MainUI.WriteInMainArea("How do you react?");
                     MainUI.WriteInMainArea("[PULL] : 1 [STEADY] : 2 [Listen] : 3 [YIELD] : 4");
 
+                    string? input = await ReadLineWithTimeout(3000);
 
-
+                    if (input == null)
+                    {
+                        fails++;
+                    }
+                    else if (int.Parse(input) == swordOptions[swordChoice].Item2)
+                    {
+                        successes++;
+                    }
+                    else
+                    {
+                        fails++;
+                    }
                 }
-                if(fails < 3)
+                if(fails >= 3)
                 {
-                    //fail
+                    MainUI.WriteInMainArea("you aren't worthy");
+                    Thread.Sleep(3000);
+
+                    Program.MainMenu();
+                    return;
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("you've acquired the legendary sword Excalibur");
+                    //give sword (missing)
+                    Program.player.IncrementStat("PlayerHasGottenExcSword");
+                    Program.SavePlayer();
+
+                    MainUI.WriteInMainArea("Press enter when you're ready to leave");
+                    Console.ReadLine();
+
+                    Program.MainMenu();
+                    return;
                 }
 
             }
+            else if (Program.player.GetStat("PlayerWorthyOfSword") < 0)
+            {
+                MainUI.WriteInMainArea("you aren't worthy");
+                Thread.Sleep(3000);
+
+                Program.MainMenu();
+                return;
+            }
             else
             {
-
+                MainUI.WriteInMainArea("something broke:0");
+                Thread.Sleep(5000);
+                Program.MainMenu();
+                return;
             }
         }
         else
         {
             MainUI.WriteInMainArea("you leave it be");
-            Thread.Sleep(200);
+            Thread.Sleep(3000);
 
             Program.MainMenu();
             return;
         }
+    }
+    async Task<string?> ReadLineWithTimeout(int milliseconds)
+    {
+        Task<string?> readTask = Task.Run(() => Console.ReadLine());
+
+        Task completedTask = await Task.WhenAny(readTask, Task.Delay(milliseconds));
+
+        if (completedTask == readTask)
+        {
+            return readTask.Result;
+        }
+
+        return null;
     }
 
     #endregion
