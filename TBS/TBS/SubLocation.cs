@@ -12,7 +12,6 @@ public enum SubLocationType
     marketplace,
     tavern,//no--
     blacksmith,
-    arena,
     bank,
     casino,
     wilderness,
@@ -22,6 +21,7 @@ public enum SubLocationType
     mine,
 
     //specific
+    TrainingGrounds,
     crypt
 }
 public class SubLocation
@@ -94,7 +94,7 @@ public class SubLocation
         
         if(type == SubLocationType.marketplace) MarketplaceLogic();
 
-        if (type == SubLocationType.arena) TrainingGroundsLogic();
+        if (type == SubLocationType.TrainingGrounds) TrainingGroundsLogic();
 
         if (type == SubLocationType.mine) MineLogic();
 
