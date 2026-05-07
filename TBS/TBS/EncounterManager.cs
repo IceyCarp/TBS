@@ -14,6 +14,7 @@ public class EncounterManager
     }
     public void ProcessTravelEncounters(Location from, Location to, bool isExploring = false)
     {
+        Encounter.SkipRemainingEncounters = false; 
         List<Encounter> encounters = Encounter.StartTravelEncounters(from, to);
         
         if (encounters.Count == 0)
@@ -36,8 +37,14 @@ public class EncounterManager
             MainUI.WriteInMainArea("¦          ENCOUNTER                     ¦");
             MainUI.WriteInMainArea("+----------------------------------------+");
             MainUI.WriteInMainArea("");
-            
+
             encounter.Execute(player, from);
+
+            if (Encounter.SkipRemainingEncounters)
+            {
+                Encounter.SkipRemainingEncounters = false;
+                return;
+            }
 
             Program.CheckPlayerDeath();
             if (!player.IsAlive())

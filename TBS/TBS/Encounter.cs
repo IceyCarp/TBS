@@ -23,6 +23,8 @@ public class Encounter
     }
     public Encounter() { }
 
+    public static bool SkipRemainingEncounters = false;
+
     private static Random rng = new Random();
 
     public static List<Encounter> StartTravelEncounters(Location a, Location b)

@@ -144,6 +144,11 @@ public static class AttackLibrary
         new AttackEffect("armor", -999, 0, "enemies"),
         new AttackEffect("dodge", -999, 0, "enemies")
     });
+    public static Attack Misdirection = new Attack("Misdirection", new List<AttackEffect> {
+    new AttackEffect("damage", 12, 0, "enemy"),
+    new AttackEffect("dodge", 25, 2, "self"),
+    new AttackEffect("speed", -3, 2, "enemy")
+});
 
 
 

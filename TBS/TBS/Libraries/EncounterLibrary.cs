@@ -1085,5 +1085,324 @@ public static class EncounterLibrary
         },
         EncounterType.Event
     );
+    public static Encounter AncientLibrary = new Encounter(
+        "AncientLibrary",
+        false,
+        "The Librarian's ghost appears. 'How fast is your mind?'",
+        null,
+        (player) => {
+            int correct = 0;
+            DateTime end = DateTime.Now.AddSeconds(30);
+            MainUI.WriteInMainArea("30 seconds of speed math! Solve as many as you can.");
+            MainUI.WriteInMainArea("Press any key to start...");
+            Console.ReadKey(true);
+            while (DateTime.Now < end)
+            {
+                int a = rng.Next(2, 13), b = rng.Next(2, 13);
+                int secsLeft = (int)(end - DateTime.Now).TotalSeconds;
+                MainUI.WriteInMainArea($"[{secsLeft}s] {a} + {b} = ?");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int res) && res == (a + b))
+                {
+                    correct++;
+                    MainUI.WriteInMainArea("Correct!");
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("Wrong!");
+                }
+            }
+            int expGained = correct * 15;
+            player.exp += expGained;
+            MainUI.WriteInMainArea($"Time's up! Solved {correct} problems. +{expGained} EXP.");
+            Program.SavePlayer();
+        },
+        EncounterType.Event
+    );
+
+    public static Encounter ChaosSignpost = new Encounter(
+    "ChaosSignpost",
+    false,
+    "You find a splintered signpost with two confusing directions.",
+    null,
+    (player) => {
+        string[] labels = { "FREE LUNCH", "CERTAIN DOOM", "DRAGON'S DEN", "SHORTCUT", "FREE RAI", "THE ABYSS", "SAFETY", "A.. CASINO, TRUST!", "CHINESE RESTAURANT", "MAID CAFE", "MONSTER AHEAD (FIRNDLY)", "MONSTER AHEAD (NOT FIRNDLY)", "DEFINITELY NOT A TRAP", "BOSS FIGHT", "???", "THE 'FUN' ROUTE", "LAST KNOWN LOCATION OF GREG", "Bazinga" };
+
+        string left = "";
+        string right = "";
+
+        while (true)
+        {
+            left = labels[rng.Next(labels.Length)];
+            right = labels[rng.Next(labels.Length)];
+            if (left != right) break;
+        }
+
+        MainUI.WriteInMainArea($"Left: {left} | Right: {right}");
+        MainUI.WriteInMainArea("Which way do you go? (1: Left, 2: Right)");
+        Console.ReadKey(true);
+
+        int outcome = rng.Next(1, 19);
+        switch (outcome)
+        {
+            case 1:
+                int rai = rng.Next(25, 100);
+                player.money += rai;
+                MainUI.WriteInMainArea($"You found {rai} Rai hidden in a bush! \nWho left this here?");
+                break;
+            case 2:
+                int dmg = rng.Next(5, 15);
+                player.HP -= dmg;
+                MainUI.WriteInMainArea($"A hidden trap triggers! You take {dmg} damage.");
+                Program.CheckPlayerDeath();
+                break;
+            case 3:
+                player.exp += 20;
+                MainUI.WriteInMainArea("The path was scenic and peaceful. You gained 20 EXP.");
+                break;
+            case 4:
+                MainUI.WriteInMainArea("The path leads in a circle. You wasted time, but found nothing.");
+                break;
+            case 5:
+                var knownLocs = player.knownLocationnames
+                    .Where(n => n != player.currentLocation)
+                    .ToList();
+                if (knownLocs.Count > 0)
+                {
+                    string dest = knownLocs[rng.Next(knownLocs.Count)];
+                    player.currentLocation = dest;
+                    MainUI.WriteInMainArea($"A mysterious force yanks you off your feet!");
+                    MainUI.WriteInMainArea($"You land in {dest}. The signpost cackles behind you.");
+                    Encounter.SkipRemainingEncounters = true;
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("A mysterious force tries to move you... but you have nowhere to go.");
+                }
+                break;
+            case 6:
+                if (player.money > 0)
+                {
+                    int stolen = rng.Next(10, Math.Min(31, player.money + 1));
+                    player.money -= stolen;
+                    MainUI.WriteInMainArea($"The signpost rattles and shakes.");
+                    MainUI.WriteInMainArea($"You feel lighter. {stolen} Rai have vanished from your pocket.");
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("The signpost eyes your empty pockets and says nothing.");
+                }
+                break;
+            case 7:
+            case 8:
+                string[] ominous = {
+                    "The signpost spins slowly and stops, pointing nowhere.\nYou feel watched.",
+                    "One of the signs reads your name.\nWhen you look again, it doesn't.",
+                    "The signpost leans toward you as you pass.\nYou walk faster.",
+                    "All the signs point the same direction.\nThat direction is down.",
+                    "You hear laughter from the signpost.\nThere is no one around.",
+                    "The wood is warm to the touch.\nYou did not touch it.",
+                    "A sign falls off as you approach.\nIt was blank on both sides."
+                };
+                MainUI.WriteInMainArea(ominous[rng.Next(ominous.Length)]);
+                break;
+            case 9:
+                MainUI.WriteInMainArea("The signpost wobbles. A painted face appears on the wood.");
+                MainUI.WriteInMainArea("\"Hey! You there. How are you doing? Tell me everything- \nHow are you, what have u been up to lately?\"");
+                MainUI.WriteInMainArea("(Type your answer and press Enter)");
+                Console.ReadLine();
+                string[] responses = {
+                    "The signpost stares blankly.\n\"Didn't ask.\"",
+                    "\"Cool story.\" \nThe signpost turns away.",
+                    "\"Wow.\" \n...It does not elaborate.",
+                    "\"I don't care even a little bit.\"",
+                    "\"Mmhm. Mmhm.\" \nIt was not listening.",
+                    "The signpost yawns.\n\"Are you done?\"",
+                    "\"That's crazy. Anyway.\"",
+                };
+                int pick = rng.Next(responses.Length + 2);
+                if (pick >= responses.Length)
+                {
+                    int slap = rng.Next(3, 8);
+                    player.HP -= slap;
+                    MainUI.WriteInMainArea("The signpost swings and smacks you across the face.");
+                    MainUI.WriteInMainArea($"\"Nobody asked.\" -{slap} HP.");
+                    MainUI.WriteInMainArea("You stumble away from the signpost hurt after the swing, \nas you hear it jumping away laughing hysterically at you");
+                    Program.CheckPlayerDeath();
+                }
+                else
+                {
+                    MainUI.WriteInMainArea(responses[pick]);
+                }
+                break;
+            case 10:
+                MainUI.WriteInMainArea("The signpost suddenly sprouts legs and arms, and hops around you excitedly.");
+                MainUI.WriteInMainArea("It grabs your sleeve. \"Hey. HEY. Lend me your ear for a second.\"");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                MainUI.WriteInMainArea("It leans in close and cups its hands around where a mouth would be.");
+                MainUI.WriteInMainArea("\"...Nobody will ever believe you.\"");
+                MainUI.WriteInMainArea("It sits back down and becomes a normal signpost again.");
+                break;
+            case 11:
+                MainUI.WriteInMainArea("The signpost points aggressively into the bushes.");
+                MainUI.WriteInMainArea("Something stirs. Then more somethings.");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                var goblinHorde = new List<Enemy> {
+                    EnemyLibrary.Goblin, EnemyLibrary.Goblin, EnemyLibrary.Goblin,
+                    EnemyLibrary.Goblin, EnemyLibrary.Goblin
+                };
+                var hordeCombat = new CombatManager(player, goblinHorde, true, null);
+                hordeCombat.StartCombat();
+                break;
+
+            case 12:
+                if (player.ownedItems.Count > 0)
+                {
+                    Item threatened = player.ownedItems[rng.Next(player.ownedItems.Count)];
+                    MainUI.WriteInMainArea("The signpost eyes your belongings.");
+                    MainUI.WriteInMainArea($"It points directly at your {threatened.name}.");
+                    MainUI.WriteInMainArea("\"Leave it. Or else.\"");
+                    MainUI.WriteInMainArea("Press any key...");
+                    Console.ReadKey(true);
+                    Inventory.DropItem(threatened, 1);
+                    MainUI.WriteInMainArea($"You leave your {threatened.name} on the ground and back away slowly.");
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("The signpost eyes your belongings.");
+                    MainUI.WriteInMainArea("You have nothing. It seems almost disappointed.");
+                }
+                break;
+
+            case 13:
+                var teleportLocs = player.knownLocationnames
+                    .Where(n => n != player.currentLocation)
+                    .ToList();
+                if (teleportLocs.Count > 0)
+                {
+                    string realDest = teleportLocs[rng.Next(teleportLocs.Count)];
+                    string fakeDest = teleportLocs[rng.Next(teleportLocs.Count)];
+                    MainUI.WriteInMainArea("The signpost glows and grabs you by the collar.");
+                    MainUI.WriteInMainArea($"\"Sending you to... {fakeDest}!\"");
+                    MainUI.WriteInMainArea("Press any key...");
+                    Console.ReadKey(true);
+                    if (fakeDest != realDest && rng.Next(0, 2) == 0)
+                    {
+                        MainUI.WriteInMainArea("\"...Actually.\"");
+                        MainUI.WriteInMainArea($"\"It's {realDest}. I misread it.\"");
+                        player.currentLocation = realDest;
+                    }
+                    else
+                    {
+                        player.currentLocation = fakeDest;
+                        MainUI.WriteInMainArea($"You land in {fakeDest}.");
+                    }
+                    MainUI.WriteInMainArea("The signpost waves goodbye.");
+                    Encounter.SkipRemainingEncounters = true;
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("The signpost tries to grab you but has nowhere to send you.");
+                }
+                break;
+
+            case 14:
+                MainUI.WriteInMainArea("The signpost begins talking to itself.");
+                MainUI.WriteInMainArea("\"Send them left.\" \"No, right.\" \"Left is better.\"");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                MainUI.WriteInMainArea("\"Right has more charm.\" \"Left has CHARACTER.\"");
+                MainUI.WriteInMainArea("\"Fine. Neither. We send them nowhere.\"");
+                MainUI.WriteInMainArea("\"...Agreed.\"");
+                MainUI.WriteInMainArea("The signpost goes quiet. You leave while it's distracted.");
+                break;
+
+            case 15:
+                MainUI.WriteInMainArea("The signpost clears its throat.");
+                MainUI.WriteInMainArea("\"A poem. For the traveller.\"");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                string[] poems = {
+                    "\"Roads go left.\nRoads go right.\nYou will probably be fine.\nGoodnight.\"",
+                    "\"There once was a man on a path.\nHe walked it and did some math.\nHe went left, or right,\nit was fine, or not quite.\nThe signpost just stood there and laughed.\"",
+                    "\"Left.\nRight.\nYou.\nWhy.\"",
+                    "\"The road is long.\nThe road is wide.\nI am a sign.\nYou are outside.\""
+                };
+                MainUI.WriteInMainArea(poems[rng.Next(poems.Length)]);
+                MainUI.WriteInMainArea("The signpost takes a bow.");
+                break;
+
+            case 16:
+                int bigExp = player.level * 50;
+                player.exp += bigExp;
+                MainUI.WriteInMainArea("The signpost looks at you for a long moment.");
+                MainUI.WriteInMainArea("Then looks away.");
+                MainUI.WriteInMainArea($"+{bigExp} EXP.");
+                MainUI.WriteInMainArea("It does not explain this.");
+                break;
+
+            case 17:
+                int healed = player.maxHP - player.HP;
+                player.HP = player.maxHP;
+                MainUI.WriteInMainArea("The signpost pats you on the head.");
+                MainUI.WriteInMainArea($"You feel completely restored. +{healed} HP.");
+                MainUI.WriteInMainArea("\"You look terrible. Go on.\"");
+                break;
+
+            case 18:
+                if (!player.ownedAttacks.Any(a => a.name == "Misdirection"))
+                {
+                    new AttackManager(player).LearnAttack(AttackLibrary.Misdirection);
+                    MainUI.WriteInMainArea("The signpost rips off one of its arms and hands it to you.");
+                    MainUI.WriteInMainArea("\"Hit someone with this. Confuse them.\"");
+                    MainUI.WriteInMainArea("\"It works on me all the time.\"");
+                    MainUI.WriteInMainArea("It grows a new arm immediately. You learned Misdirection.");
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("The signpost goes to hand you something, then notices you already have it.");
+                    MainUI.WriteInMainArea("\"Oh. You've met me before.\"");
+                    int bonusExp = player.level * 25;
+                    player.exp += bonusExp;
+                    MainUI.WriteInMainArea($"+{bonusExp} EXP as a consolation.");
+                }
+                break;
+        }
+        Program.SavePlayer();
+    },
+    EncounterType.Trap
+);
+
+    public static Encounter SuspiciousChest = new Encounter(
+        "SuspiciousChest",
+        false,
+        "A lone chest sits in the middle of the road. It's... breathing.",
+        null,
+        (player) => {
+            MainUI.WriteInMainArea("Open the chest? (y/n)");
+            if (Console.ReadKey(true).KeyChar == 'y')
+            {
+                if (rng.Next(1, 101) <= 40)
+                {
+                    player.HP -= 20;
+                    if (player.HP < 1) player.HP = 1;
+                    MainUI.WriteInMainArea("MIMIC! Rows of teeth slam shut. -20 HP. You scramble free.");
+                }
+                else
+                {
+                    player.money += 25;
+                    MainUI.WriteInMainArea("Just a chest after all. 25 Rai inside — not bad.");
+                }
+                Program.SavePlayer();
+            }
+            else
+            {
+                MainUI.WriteInMainArea("You give it a wide berth. It watches you leave.");
+            }
+        },
+        EncounterType.Treasure
+    );
     #endregion
 }
