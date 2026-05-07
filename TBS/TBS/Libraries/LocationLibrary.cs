@@ -471,14 +471,13 @@ new Dictionary<Encounter, int>
         new SubLocation("Graveyard", SubLocationType.graveyard)
         {
         },
-        new SubLocation("Wilderness",SubLocationType.wilderness)
+        new SubLocation("Clearing",SubLocationType.swordInStone)
         {
 
         }
     },
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50}
 
     }, null);
 

@@ -103,8 +103,8 @@ public class SubLocation
 
         if (type == SubLocationType.crypt) CryptLogic();
 
-        if(type == SubLocationType.swordInStone) SwordInStoneLogic();
-             
+        if(type == SubLocationType.swordInStone) SwordInStoneLogic().Wait();
+
         // not done---
         if (type == SubLocationType.tavern)
         {
@@ -2498,21 +2498,25 @@ public class SubLocation
             if (!hasStat)
             {
                 int rand = new Random().Next(1, 101);
-                if (rand == 1) 
+                if (rand == 9) 
                 {
                     Program.player.IncrementStat("PlayerWorthyOfSword");
-                    Program.player.IncrementStat("PlayerWorthyOfSword",-1);
+                    Program.SavePlayer();
+                }
+                else
+                {
+                    Program.player.IncrementStat("PlayerWorthyOfSword", -1);
                     Program.SavePlayer();
                 }
                 
             }
 
-            MainUI.WriteInMainArea("You grip the hilt of the sword firmly");
+            MainUI.WriteInMainArea("\nYou grip the hilt of the sword firmly");
 
             if (Program.player.GetStat("PlayerWorthyOfSword") > 0)
             {
-                MainUI.WriteInMainArea("it feels natural in your hand, as if it was destined to be yours");
-                MainUI.WriteInMainArea("Press enter when you're ready to pull");
+                MainUI.WriteInMainArea("\nit feels natural in your hand, as if it was destined to be yours");
+                MainUI.WriteInMainArea("\nPress enter when you're ready to pull");
                 Console.ReadLine();
 
                 MainUI.ClearMainArea();
@@ -2534,14 +2538,20 @@ public class SubLocation
                     if (input == null)
                     {
                         fails++;
+                        MainUI.WriteInMainArea("too slow, The sword seems sad");
+                        Thread.Sleep(1000);
                     }
                     else if (int.Parse(input) == swordOptions[swordChoice].Item2)
                     {
                         successes++;
+                        MainUI.WriteInMainArea("The sword seems happy");
+                        Thread.Sleep(1000);
                     }
                     else
                     {
                         fails++;
+                        MainUI.WriteInMainArea("The sword seems sad");
+                        Thread.Sleep(1000);
                     }
                 }
                 if(fails >= 3)
@@ -2573,7 +2583,7 @@ public class SubLocation
             }
             else if (Program.player.GetStat("PlayerWorthyOfSword") < 0)
             {
-                MainUI.WriteInMainArea("you aren't worthy");
+                MainUI.WriteInMainArea("\nyou aren't worthy");
                 Thread.Sleep(3000);
 
                 Program.MainMenu();
@@ -2589,7 +2599,7 @@ public class SubLocation
         }
         else
         {
-            MainUI.WriteInMainArea("you leave it be");
+            MainUI.WriteInMainArea("\nyou leave it be");
             Thread.Sleep(3000);
 
             Program.MainMenu();
@@ -2598,7 +2608,7 @@ public class SubLocation
     }
     async Task<string?> ReadLineWithTimeout(int milliseconds)
     {
-        Task<string?> readTask = Task.Run(() => Console.ReadLine());
+        Task<string> readTask = Task.Run(() => Console.ReadKey(true).KeyChar.ToString());
 
         Task completedTask = await Task.WhenAny(readTask, Task.Delay(milliseconds));
 
