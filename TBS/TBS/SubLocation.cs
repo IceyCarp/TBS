@@ -533,7 +533,7 @@ public class SubLocation
             }
 
             // Check if item is equipped
-            int equippedSlot = Program.player.equippedItems.IndexOf(selectedItem);
+            int equippedSlot = Program.player.equippedItems.FindIndex(item => item?.name == selectedItem?.name);
             if (equippedSlot >= 0)
             {
                 MainUI.WriteInMainArea($"\nThis item is equipped. Unequipping {selectedItem.name}...");
