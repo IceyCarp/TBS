@@ -125,9 +125,9 @@ public static class AttackLibrary
     }, ClassLibrary.Rogue);
 
     public static Attack WillowShot = new Attack("Willowrend Shot", new List<AttackEffect> {
-    new AttackEffect("damage", 15, 0, "enemy"),
-    new AttackEffect("dodge", -30, 3, "enemy"),   
-    new AttackEffect("dodgeNegation", -20, 3, "enemy")    
+        new AttackEffect("damage", 15, 0, "enemy"),
+        new AttackEffect("dodge", -30, 3, "enemy"),   
+        new AttackEffect("dodgeNegation", -20, 3, "enemy")    
     });
         public static Attack IronFist = new Attack("Iron Fist", new List<AttackEffect> {
         new AttackEffect("damage", 15, 0, "enemy"),
