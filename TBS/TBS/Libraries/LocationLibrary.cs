@@ -400,6 +400,7 @@ new Dictionary<Encounter, int>
     #endregion
 
     #region "wilderness"
+    #region "Tofrozen" 
     public static Location FrozenWastes = new Location("Frozen Wastes", new System.Numerics.Vector2(-3, 1), 20, new List<SubLocation>
     {
         new SubLocation("Graveyard", SubLocationType.graveyard)
@@ -436,6 +437,8 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.IceMageEncounter, 20},
         { EncounterLibrary.SnowWraithAttack, 10}
     }, null);
+    #endregion
+    #region "Elves"
     public static Location SvalbardWastes = new Location("Svalbard Wastes", new System.Numerics.Vector2(3, 0), 0, new List<SubLocation>
     {
         new SubLocation("Graveyard", SubLocationType.graveyard)
@@ -446,11 +449,14 @@ new Dictionary<Encounter, int>
 
         }
     },
-    new Dictionary<Encounter, int>
+            new Dictionary<Encounter, int>
     {
         { EncounterLibrary.DireWolfPack, 50},
         { EncounterLibrary.GoblinPack, 20}
     }, null);
+    #endregion
+    #region "ToAria"
+
     public static Location ColdshadeForest = new Location("Coldshade forest", new System.Numerics.Vector2(-7, 0), 0, new List<SubLocation>
     {
         new SubLocation("Graveyard", SubLocationType.graveyard)
@@ -467,6 +473,11 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.SnowElkAndWolf, 30},
         { EncounterLibrary.ColdStalker, 10},
         { EncounterLibrary.FrozenElk, 50},
+        { EncounterLibrary.AbandonedBackpack, 20 },
+        { EncounterLibrary.StrangeMushrooms, 15 },
+        { EncounterLibrary.InjuredWolf, 2 },
+        { EncounterLibrary.AriaPropagandaBoard, 15 },
+        { EncounterLibrary.ChaosSignpost, 8 }
 
     }, null);
     public static Location QuietClearing = new Location("Quiet clearing", new System.Numerics.Vector2(-8, 0), 0, new List<SubLocation>
@@ -481,7 +492,12 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-
+        { EncounterLibrary.DyingTraveler, 30 },
+        { EncounterLibrary.AncientLibrary, 20 },
+        { EncounterLibrary.MysteriousShrine, 25 },
+        { EncounterLibrary.FoundTreasure, 15 },
+        { EncounterLibrary.AriaPropagandaBoard, 10 },
+        { EncounterLibrary.ChaosSignpost, 5 },
     }, null);
 
     public static Location TheWithering = new Location("The Withering", new System.Numerics.Vector2(-7, -1), 0, new List<SubLocation>
@@ -496,7 +512,14 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50}
+        { EncounterLibrary.DireWolfPack, 50},
+        { EncounterLibrary.SkeletonWarriors, 25 },
+        { EncounterLibrary.VampireAttack, 20 },
+        { EncounterLibrary.MysteriousShrine, 15 },
+        { EncounterLibrary.SuspiciousChest, 20 },
+        { EncounterLibrary.DyingTraveler, 25 },
+        { EncounterLibrary.AncientLibrary, 10 },
+        { EncounterLibrary.ChaosSignpost, 15 },
 
     }, null);
 
@@ -512,7 +535,15 @@ new Dictionary<Encounter, int>
     }, 
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50}
+        { EncounterLibrary.DireWolfPack, 50},
+        { EncounterLibrary.WanderingMerchant, 5 },
+        { EncounterLibrary.RoadGambling, 20 },
+        { EncounterLibrary.DyingTraveler, 30 },
+        { EncounterLibrary.SuspiciousChest, 15 },
+        { EncounterLibrary.AncientLibrary, 5 },
+        { EncounterLibrary.FoundCoins, 20 },
+        { EncounterLibrary.ChaosSignpost, 25 },
+        { EncounterLibrary.AriaPropagandaBoard, 25 }
 
     }, null);
 
@@ -529,10 +560,17 @@ new Dictionary<Encounter, int>
 
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50}
+        { EncounterLibrary.DireWolfPack, 50},
+        { EncounterLibrary.BanditAmbush, 20 },
+        { EncounterLibrary.MysteriousShrine, 20 },
+        { EncounterLibrary.SuspiciousChest, 25 },
+        { EncounterLibrary.DyingTraveler, 20 },
+        { EncounterLibrary.AriaPropagandaBoard, 20 },
+        { EncounterLibrary.ChaosSignpost, 8 },
+        { EncounterLibrary.AncientLibrary, 10 },
 
     }, null);
-
+    #endregion
     #endregion
 
     #region"Frostborn Dominion"
@@ -951,7 +989,8 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-
+        { EncounterLibrary.AncientLibrary, 25 },
+        { EncounterLibrary.ChaosSignpost, 8 },
     }, "Deep Dark");
 
     public static Location NecroticCatacombs = new Location("Necrotic Catacombs", new System.Numerics.Vector2(-10, 0), 0, new List<SubLocation>
@@ -967,7 +1006,8 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-
+        { EncounterLibrary.AncientLibrary, 25 },
+        { EncounterLibrary.ChaosSignpost, 8 },
     }, "Deep Dark");
 
     #endregion
