@@ -422,6 +422,15 @@ public static class EncounterLibrary
     EncounterType.Combat
     );
 
+    public static Encounter RotWalkerHorde = new Encounter(
+    "RotWalkerHorde",
+    true,
+    "you find yourself in the middle of a Horde of RotWalkers",
+    new List<Enemy> { EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker,
+        EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker,EnemyLibrary.rotWalker,EnemyLibrary.rotWalker,EnemyLibrary.rotWalker },
+    null,
+    EncounterType.Combat
+    );
 
     #endregion
 

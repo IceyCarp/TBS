@@ -396,6 +396,48 @@ public static class EnemyLibrary
         }
     };
 
+
+    public static Enemy rotWalker = new Enemy("rotWalker", 6, 20, 20, 2, 0, 0, 0, 10, 100, 0, 0, 5)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Slap, 
+            AttackLibrary.Bite,
+            AttackLibrary.PoisonBite
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Slap, 30 },
+            { AttackLibrary.Bite, 70 },
+            { AttackLibrary.PoisonBite, 5 }
+        }
+    };
+
+
+    public static Enemy CaravanGuard = new Enemy("Caravan Guard", 17, 100, 300, 1, 15, 0, 0, 0, 0, 0, 0, 14)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Slash
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Slash, 100 }
+        }
+    };
+
+    public static Enemy CrossbowMercenary = new Enemy("Crossbow Mercenary", 12, 80, 80, 7, 3, 10, 0, 20, 100, 0, 0, 10)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.CrossBowShot
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.CrossBowShot, 100 }
+        }
+    };
+
     #endregion
 
     #region misc

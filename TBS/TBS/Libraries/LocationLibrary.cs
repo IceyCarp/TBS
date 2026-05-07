@@ -512,13 +512,13 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50},
+        { EncounterLibrary.RotWalkerHorde, 70},
         { EncounterLibrary.SkeletonWarriors, 25 },
         { EncounterLibrary.VampireAttack, 20 },
         { EncounterLibrary.MysteriousShrine, 15 },
         { EncounterLibrary.SuspiciousChest, 20 },
         { EncounterLibrary.DyingTraveler, 25 },
-        { EncounterLibrary.AncientLibrary, 10 },
+        { EncounterLibrary.AncientLibrary, 3 },
         { EncounterLibrary.ChaosSignpost, 15 },
 
     }, null);
