@@ -17,7 +17,17 @@ public static class EnemyLibrary
             { AttackLibrary.ThrowHands, 100 }
         }
     };
-
+    public static Enemy LostChild = new Enemy("Lost Child", 1, 0, 3, 3, 0, 50, 5, 5, 400, 0, 0, 0)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Slap
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Slap, 100 }
+        }
+    };
     public static Enemy Goblin = new Enemy("Goblin", 1, 5, 5, 16, 0, 25, 0, 10, 100, 5, 0, 0)
     {
         attacks = new List<Attack>

@@ -45,6 +45,10 @@ public static class AttackLibrary
         new AttackEffect("damage", 20, 0, "enemy")
     });
 
+    public static Attack Slap = new Attack("Slap", new List<AttackEffect> {
+        new AttackEffect("damage", 5, 0, "enemy")
+    });
+
     public static Attack VampiricSlash = new Attack("Vampiric Slash", new List<AttackEffect> {
         new AttackEffect("damage", 20, 0, "enemy"),
         new AttackEffect("heal", 10, 0, "self")

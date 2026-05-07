@@ -755,7 +755,7 @@ public static class EncounterLibrary
 
         if (choice == "y" || choice == "yes")
         {
-            int outcome = rng.Next(1, 101); 
+            int outcome = rng.Next(1, 111); 
 
             if (outcome <= 50)
             {
@@ -782,9 +782,48 @@ public static class EncounterLibrary
                     $"As you approach, the child panics and swings a stick! You take {damage} damage!");
                 Program.CheckPlayerDeath();
             }
+            else if (outcome <= 105)
+            {
+                MainUI.WriteInMainArea($"\nThe child calms down, but no one shows up.");
+                MainUI.WriteInMainArea($"Do you wish to bring it with you (y/n)");
+
+                string choice2 = Console.ReadKey(true).KeyChar.ToString().ToLower();
+
+                if (choice2 == "y" || choice2 == "yes")
+                {
+                    int maxCompanions = CompanionSystem.GetMaxCompanions(player);
+                    var currentCompanions = CompanionSystem.GetCompanions(player);
+
+                    if (maxCompanions == 0)
+                    {
+                        MainUI.WriteInMainArea($"\nYour class ({player.playerClass.name}) cannot have companions!");
+                        MainUI.WriteInMainArea("You leave the child to fend for itself");
+                    }
+                    else if (currentCompanions.Count <= maxCompanions)
+                    {
+                        MainUI.WriteInMainArea("\nyou cannot bring any more companions with you");
+                        MainUI.WriteInMainArea("You leave the child to fend for itself");
+                    }
+                    else
+                    {
+                        MainUI.WriteInMainArea("you bring the child under your care \nit'll be of some help down the road");
+                        bool success = CompanionSystem.RecruitByName(player, "lost child");
+
+                        if (success)
+                        {
+                            MainUI.WriteInMainArea("\nThe Lost Child has joined your party as a loyal companion!");
+                        }
+                    }
+
+                }
+                else
+                {
+                    MainUI.WriteInMainArea("You leave the child to fend for itself");
+                }
+            }
             else
             {
-                
+
                 MainUI.WriteInMainArea("The child calms down, but no one shows up. You move on.");
             }
 
