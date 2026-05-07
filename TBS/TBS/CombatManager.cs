@@ -356,7 +356,7 @@ public class CombatManager
                 dodged = false; crit = false; stunnedApplied = false;
                 rawBeforeArmor = 0; armorApplied = 0; mult = 1.0;
             
-                int dodgeChance = Math.Clamp(defender.dodge - attacker.dodgeNegation, 0, 100);
+                int dodgeChance = Math.Min(Math.Clamp(defender.dodge - attacker.dodgeNegation, 0, 100),95);
                 if (RollChance(dodgeChance))
                 {
                     dodged = true;
