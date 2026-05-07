@@ -114,7 +114,7 @@ public class Player : Combatant
         
         if(c.extraStat != null)
         {
-            SetStat(c.extraStat, (int)(c.extraStatIncrease.Value*levelsAbove1));
+            SetStat(c.extraStat, (int)(c.extraStatIncrease.Value*(levelsAbove1+1)));
         }
 
         foreach (Item item in ownedItems)
