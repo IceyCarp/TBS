@@ -432,6 +432,24 @@ public static class EncounterLibrary
     EncounterType.Combat
     );
 
+    public static Encounter CaravanAmbush = new Encounter(
+    "CaravanAmbush",
+    true,
+    "You find yourself in the way of a traveling caravan\nthey take offence and launch an attack",
+    new List<Enemy> { EnemyLibrary.CaravanGuard, EnemyLibrary.CaravanGuard, EnemyLibrary.CrossbowMercenary },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter CaravanTrap = new Encounter(
+    "CaravanTrap",
+    true,
+    "You see an abandoned caravan, as you approach you are suddenly under attack",
+    new List<Enemy> { EnemyLibrary.CaravanGuard, EnemyLibrary.Thug, EnemyLibrary.CrossbowMercenary, EnemyLibrary.CrossbowMercenary },
+    null,
+    EncounterType.Combat
+    );
+
     #endregion
 
     #region Combat Encounters - Rootbound Empire
