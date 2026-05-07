@@ -345,4 +345,24 @@ public static class EnemyLibrary
 
     #endregion
 
+    #region misc
+
+    public static Enemy BridgeTroll = new Enemy("Bridge Troll", 16, 250, 200, 10, 4, 0, 50, 20, 100, 20, 50, 100)
+    {
+
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Haymaker,
+            AttackLibrary.BoneShatter,
+            AttackLibrary.HeavySlam
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+        },
+        materialDrops = new List<MaterialDrop>
+        {
+            new MaterialDrop(ItemLibrary.rock, 1, 5, 0.4f)        }
+    };
+    #endregion
+
 }

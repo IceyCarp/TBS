@@ -1035,5 +1035,55 @@ public static class EncounterLibrary
         EncounterType.Event
     );
 
+    
+    public static Encounter BridgeTroll = new Encounter("BridgeTroll",
+        false,
+        "You stumble upon a bride, and hear a large creature talking to you below",
+        null,
+        (player) => {
+        MainUI.WriteInMainArea("The creature asks you for rai to pass his bridge.");
+        MainUI.WriteInMainArea("He seems a bit aggressive, if u dont pay him, we will likely start a fight.");
+        MainUI.WriteInMainArea("\nDo u offer him any rai? ");
+            string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+            if (choice == "y" || choice == "yes")
+            {
+                MainUI.WriteInMainArea($"how much do you want to offer him? current Rai: {Program.player.money}");
+                int.TryParse(Console.ReadLine(), out int bet);
+                if (bet == null || bet < 0)
+                {
+                    MainUI.ClearMainArea();
+                    MainUI.WriteInMainArea("sweetie you gotta type a number that we can use\n ");
+                    return;
+                }
+                else if (bet > Program.player.money)
+                {
+                    MainUI.WriteInMainArea("\nyou dont have that much Rai\n ");
+                    return;
+                }
+                int roll = rng.Next(1, bet+20);
+                if (roll >= 19)
+                {
+                    MainUI.WriteInMainArea($"The troll takes your offered amount of {bet} and lets u pass");
+                    Program.player.money -= bet;
+
+                }
+                else
+                {
+                    MainUI.WriteInMainArea($"you offered {bet}, the troll looks at you with anger and starts a fight");
+                    Program.player.money -= bet;
+                    Program.SavePlayer();
+                    var combat = new CombatManager(player, new List<Enemy> { EnemyLibrary.BridgeTroll }, true, null);
+                    combat.StartCombat();
+                }
+            }
+            else
+            {
+                MainUI.WriteInMainArea("The troll, angered, starts a brawl with you.");
+                var combat = new CombatManager(player, new List<Enemy> { EnemyLibrary.BridgeTroll }, true, null);
+                combat.StartCombat();
+            }
+        },
+        EncounterType.Event
+    );
     #endregion
 }
