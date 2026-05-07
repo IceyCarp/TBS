@@ -24,6 +24,7 @@ public class Encounter
     public Encounter() { }
 
     public static bool SkipRemainingEncounters = false;
+    public static string TravelDestination = "";
 
     private static Random rng = new Random();
 

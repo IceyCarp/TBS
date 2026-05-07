@@ -14,7 +14,8 @@ public class EncounterManager
     }
     public void ProcessTravelEncounters(Location from, Location to, bool isExploring = false)
     {
-        Encounter.SkipRemainingEncounters = false; 
+        Encounter.SkipRemainingEncounters = false;
+        Encounter.TravelDestination = to?.name ?? "";
         List<Encounter> encounters = Encounter.StartTravelEncounters(from, to);
         
         if (encounters.Count == 0)

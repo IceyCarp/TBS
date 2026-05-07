@@ -1218,7 +1218,7 @@ public static class EncounterLibrary
         MainUI.WriteInMainArea("Which way do you go? (1: Left, 2: Right)");
         Console.ReadKey(true);
 
-        int outcome = rng.Next(1, 21);
+        int outcome = rng.Next(1, 20);
         switch (outcome)
         {
             case 1:
@@ -1241,7 +1241,7 @@ public static class EncounterLibrary
                 break;
             case 5:
                 var knownLocs = player.knownLocationnames
-                    .Where(n => n != player.currentLocation)
+                    .Where(n => n != player.currentLocation && n != Encounter.TravelDestination)
                     .ToList();
                 if (knownLocs.Count > 0)
                 {
@@ -1354,7 +1354,7 @@ public static class EncounterLibrary
 
             case 13:
                 var teleportLocs = player.knownLocationnames
-                    .Where(n => n != player.currentLocation)
+                    .Where(n => n != player.currentLocation && n != Encounter.TravelDestination)
                     .ToList();
                 if (teleportLocs.Count > 0)
                 {
@@ -1457,22 +1457,6 @@ public static class EncounterLibrary
                 MainUI.WriteInMainArea("...");
                 MainUI.WriteInMainArea("The signpost giggles.");
                 MainUI.WriteInMainArea("\"Got you.\"");
-                break;
-
-            case 20:
-                MainUI.WriteInMainArea("The signpost points left. Then right. Then left again, faster.");
-                MainUI.WriteInMainArea("It starts vibrating.");
-                MainUI.WriteInMainArea("Press any key...");
-                Console.ReadKey(true);
-                MainUI.WriteInMainArea("The bushes explode. There are so many goblins.");
-                MainUI.WriteInMainArea("You don't have time to count. You just start fighting.");
-                Console.ReadKey(true);
-                var absurdHorde = new List<Enemy> {
-                    EnemyLibrary.Goblin, EnemyLibrary.Goblin, EnemyLibrary.Goblin,
-                    EnemyLibrary.Goblin, EnemyLibrary.Goblin
-                };
-                var absurdCombat = new CombatManager(player, absurdHorde, true, null);
-                absurdCombat.StartCombat();
                 break;
         }
         Program.SavePlayer();
