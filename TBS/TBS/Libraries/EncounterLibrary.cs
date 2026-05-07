@@ -954,7 +954,7 @@ public static class EncounterLibrary
             
             if (choice == "y" || choice == "yes")
             {
-                var bigHealingPotion = player.ownedItems.FirstOrDefault(i => i.name == "Big Health Potion" && i.amount > 0);
+                var bigHealingPotion = player.ownedItems.FirstOrDefault(i => i.name == ItemLibrary.bigHealthPotion.name && i.amount > 0);
                 
                 if (bigHealingPotion == null)
                 {
