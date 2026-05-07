@@ -66,7 +66,7 @@ public static class AttackLibrary
 
     public static Attack FishCut = new Attack("FishCut", new List<AttackEffect> {
         new AttackEffect("damage", 30, 0, "enemy"),
-        new AttackEffect("dodge", 20, 3, "enemy"),
+        new AttackEffect("dodge", 15, 3, "enemy"),
     });
 
     public static Attack Snowball = new Attack("Snowball", new List<AttackEffect> {
