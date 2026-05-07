@@ -184,7 +184,6 @@ public static class EncounterLibrary
     EncounterType.Event
 );
 
-
     #endregion
 
     #region Combat Encounters - Basic/Starter Areas
@@ -1183,7 +1182,7 @@ public static class EncounterLibrary
         MainUI.WriteInMainArea("Which way do you go? (1: Left, 2: Right)");
         Console.ReadKey(true);
 
-        int outcome = rng.Next(1, 19);
+        int outcome = rng.Next(1, 21);
         switch (outcome)
         {
             case 1:
@@ -1410,11 +1409,68 @@ public static class EncounterLibrary
                     MainUI.WriteInMainArea($"+{bonusExp} EXP as a consolation.");
                 }
                 break;
+            case 19:
+                MainUI.WriteInMainArea("The signpost starts shaking violently.");
+                MainUI.WriteInMainArea("The ground rumbles. You hear screaming in the distance.");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                MainUI.WriteInMainArea("Twenty goblins burst out of the treeline, charging directly at you.");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                MainUI.WriteInMainArea("They run straight past you.");
+                MainUI.WriteInMainArea("...");
+                MainUI.WriteInMainArea("The signpost giggles.");
+                MainUI.WriteInMainArea("\"Got you.\"");
+                break;
+
+            case 20:
+                MainUI.WriteInMainArea("The signpost points left. Then right. Then left again, faster.");
+                MainUI.WriteInMainArea("It starts vibrating.");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                MainUI.WriteInMainArea("The bushes explode. There are so many goblins.");
+                MainUI.WriteInMainArea("You don't have time to count. You just start fighting.");
+                Console.ReadKey(true);
+                var absurdHorde = new List<Enemy> {
+                    EnemyLibrary.Goblin, EnemyLibrary.Goblin, EnemyLibrary.Goblin,
+                    EnemyLibrary.Goblin, EnemyLibrary.Goblin
+                };
+                var absurdCombat = new CombatManager(player, absurdHorde, true, null);
+                absurdCombat.StartCombat();
+                break;
         }
         Program.SavePlayer();
     },
     EncounterType.Trap
 );
+    public static Encounter AriaPropagandaBoard = new Encounter(
+        "AriaPropagandaBoard",
+        false,
+        "A large board stands by the roadside, plastered with colourful posters.",
+        null,
+        (player) => {
+            string[] posters = {
+            "ARIA — THE CITY THAT NEVER SLEEPS (AND NEITHER SHOULD YOU)\nFine print: Sleep deprivation is not the city's responsibility.",
+            "THINKING OF LEAVING ARIA?\nDon't.\n- The Aria City Council",
+            "ARIA: POPULATION 40,000 HAPPY CITIZENS\n(Happiness is mandatory.)",
+            "VISIT ARIA!\nClean streets. Safe walls. No questions asked.\nAsk no questions.",
+            "ARIA WELCOMES ALL TRAVELLERS\n(Subject to entry screening, background checks,\nweapon confiscation and a small processing fee.)",
+            "THE ROAD TO ARIA IS THE ROAD TO OPPORTUNITY\nAria is not responsible for what happens on the road.",
+            };
+            MainUI.WriteInMainArea("The board is covered in official-looking posters about Aria.");
+            Thread.Sleep(1500);
+            MainUI.WriteInMainArea("You stop to read one.");
+            Thread.Sleep(2000);
+            MainUI.WriteInMainArea(posters[rng.Next(posters.Length)]);
+            Thread.Sleep(4000);
+            MainUI.WriteInMainArea("\nYou stand there for a moment.");
+            Thread.Sleep(1500);
+            MainUI.WriteInMainArea("You continue walking.");
+            Program.SavePlayer();
+        },
+        EncounterType.Event
+    );
+
 
     public static Encounter SuspiciousChest = new Encounter(
         "SuspiciousChest",
@@ -1445,5 +1501,59 @@ public static class EncounterLibrary
         },
         EncounterType.Treasure
     );
+    public static Encounter DyingTraveler = new Encounter(
+    "DyingTraveler",
+    false,
+    "Someone is slumped against a milestone by the road. They're still breathing. Barely.",
+    null,
+    (player) => {
+        MainUI.WriteInMainArea("A traveler, badly wounded, reaches a hand toward you.");
+        MainUI.WriteInMainArea("\"Please...\"");
+        MainUI.WriteInMainArea("");
+
+        var healingItem = player.ownedItems.FirstOrDefault(i =>
+            i.stats.ContainsKey("heal") && i.amount >= 1);
+
+        if (healingItem != null)
+        {
+            MainUI.WriteInMainArea($"You have a {healingItem.name}. Use it on them? (y/n)");
+            if (Console.ReadKey(true).KeyChar == 'y')
+            {
+                Inventory.DropItem(healingItem, 1);
+                MainUI.WriteInMainArea("You kneel down and use it on them.");
+                MainUI.WriteInMainArea("The colour slowly returns to their face.");
+                MainUI.WriteInMainArea("They grab your arm.");
+                MainUI.WriteInMainArea("Press any key...");
+                Console.ReadKey(true);
+                string[] info = {
+                    "\"Don't go to Aria through the main gate.\nThey search everyone. There's a side entrance, east wall.\"",
+                    "\"The road north of here... something lives in it now.\nIt isn't an animal.\"",
+                    "\"I had coin on me. It's gone.\nWhoever did this came from the direction you're heading.\"",
+                    "\"Aria isn't what they say it is.\nJust... remember that when you get there.\"",
+                };
+                MainUI.WriteInMainArea(info[rng.Next(info.Length)]);
+                int expGain = player.level * 10;
+                player.exp += expGain;
+                MainUI.WriteInMainArea($"\n+{expGain} EXP.");
+            }
+            else
+            {
+                MainUI.WriteInMainArea("You step around them and keep walking.");
+                MainUI.WriteInMainArea("They don't call after you.");
+                MainUI.WriteInMainArea("You don't look back.");
+            }
+        }
+        else
+        {
+            MainUI.WriteInMainArea("You have nothing to help them with.");
+            MainUI.WriteInMainArea("You check your bag twice, just to be sure.");
+            MainUI.WriteInMainArea("\"It's alright,\" they say.");
+            MainUI.WriteInMainArea("\"Go on.\"");
+            MainUI.WriteInMainArea("You do.");
+        }
+        Program.SavePlayer();
+    },
+    EncounterType.Event
+);
     #endregion
 }
