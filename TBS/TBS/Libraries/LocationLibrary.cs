@@ -537,6 +537,7 @@ new Dictionary<Encounter, int>
     {
         { EncounterLibrary.CaravanAmbush, 50},
         { EncounterLibrary.CaravanTrap, 50},
+        { EncounterLibrary.TheifAmbush, 20},
         { EncounterLibrary.WanderingMerchant, 5 },
         { EncounterLibrary.RoadGambling, 20 },
         { EncounterLibrary.DyingTraveler, 30 },
