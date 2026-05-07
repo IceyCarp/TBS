@@ -76,6 +76,7 @@ public static class LocationLibrary
         { EncounterLibrary.FoundTreasure, 25},
         { EncounterLibrary.StrangeMushrooms, 20},
         { EncounterLibrary.WanderingMerchant, 15},
+        { EncounterLibrary.ChaosSignpost, 83456 },
         { EncounterLibrary.FallenIntoTrap, 10},
         { EncounterLibrary.FallingFish, 10},
         { EncounterLibrary.LostChild, 5}
@@ -107,6 +108,7 @@ public static class LocationLibrary
         { EncounterLibrary.FoundTreasure, 25},
         { EncounterLibrary.FallingFish, 20},
         { EncounterLibrary.SeaBanditRaid, 15},
+        { EncounterLibrary.ChaosSignpost, 1 },
         { EncounterLibrary.WanderingMerchant, 10}
     }, "Coastal Alliance");
 
@@ -183,6 +185,7 @@ public static class LocationLibrary
         { EncounterLibrary.FoundTreasure, 15},
         { EncounterLibrary.AbandonedBackpack, 5},
         { EncounterLibrary.InjuredWolf, 2},
+        { EncounterLibrary.ChaosSignpost, 2 },
         { EncounterLibrary.WeakRopeBridge, 5}
     }, "Greenwood Territories");
 
@@ -232,7 +235,7 @@ public static class LocationLibrary
     },
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.GoblinPack, 50},
+        { EncounterLibrary.GoblinPack, 40},
         { EncounterLibrary.StrangeMushrooms, 30},
         { EncounterLibrary.FoundCoins, 20 },
         { EncounterLibrary.FallenIntoTrap, 40},
@@ -241,6 +244,7 @@ public static class LocationLibrary
         { EncounterLibrary.DireWolfPack, 20},
         { EncounterLibrary.AbandonedBackpack, 5},
         { EncounterLibrary.InjuredWolf, 5},
+        { EncounterLibrary.ChaosSignpost, 8 },
         { EncounterLibrary.WeakRopeBridge, 10}
     }, "Greenwood Territories");
     #endregion
@@ -335,6 +339,7 @@ public static class LocationLibrary
         { EncounterLibrary.GhostlyApparition, 30},
         { EncounterLibrary.SkeletonWarriors, 30},
         { EncounterLibrary.FoundTreasure, 20},
+        { EncounterLibrary.ChaosSignpost, 7 },
         { EncounterLibrary.AbandonedBackpack, 2}
     }, "Fallen Kingdom");
 
@@ -365,6 +370,7 @@ public static class LocationLibrary
     new Dictionary<Encounter, int>
     {
         { EncounterLibrary.FoundTreasure, 40},
+        { EncounterLibrary.ChaosSignpost, 2 },
         { EncounterLibrary.VampireAttack, 60}
     }, "Fallen Kingdom");
 
@@ -395,6 +401,7 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.FoundTreasure, 20},
         { EncounterLibrary.GhostlyApparition, 60},
         { EncounterLibrary.SkeletonWarriors, 60},
+        { EncounterLibrary.ChaosSignpost, 3 },
         { EncounterLibrary.AbandonedBackpack, 2}
 }, "Fallen Kingdom");
     #endregion
@@ -417,6 +424,7 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.FrostTrollAmbush, 30},
         { EncounterLibrary.IceMageEncounter, 25},
         { EncounterLibrary.FrozenHorde, 15},
+        { EncounterLibrary.ChaosSignpost, 2 },
         { EncounterLibrary.LostChild, 1}
     }, null);
 
@@ -435,6 +443,7 @@ new Dictionary<Encounter, int>
         { EncounterLibrary.IceWolfPack, 45},
         { EncounterLibrary.FrostTrollAmbush, 35},
         { EncounterLibrary.IceMageEncounter, 20},
+        { EncounterLibrary.ChaosSignpost, 2 },
         { EncounterLibrary.SnowWraithAttack, 10}
     }, null);
     #endregion
@@ -452,6 +461,7 @@ new Dictionary<Encounter, int>
             new Dictionary<Encounter, int>
     {
         { EncounterLibrary.DireWolfPack, 50},
+        { EncounterLibrary.ChaosSignpost, 5 },
         { EncounterLibrary.GoblinPack, 20}
     }, null);
     #endregion
