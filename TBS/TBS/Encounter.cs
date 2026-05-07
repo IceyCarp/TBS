@@ -29,6 +29,8 @@ public class Encounter
     {
         Dictionary<Encounter, int> possibleEncounters = GetPossibleEncounters(a, b);
 
+        if (possibleEncounters == null) return new List<Encounter>();
+
         float pWeight = Program.player.inventoryWeight;
 
         int encounterThreshold = 500;

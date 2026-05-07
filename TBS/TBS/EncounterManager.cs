@@ -15,7 +15,7 @@ public class EncounterManager
     public void ProcessTravelEncounters(Location from, Location to, bool isExploring = false)
     {
         List<Encounter> encounters = Encounter.StartTravelEncounters(from, to);
-
+        
         if (encounters.Count == 0)
         {
             MainUI.WriteInMainArea("\nYour journey was peaceful.");

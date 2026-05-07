@@ -11,7 +11,7 @@ public static class Inventory
     private static string searchTerm = ""; 
     private static List<Item> filteredItems; // This will hold the items we are currently viewing
 
-    static float exponent = 1.5f;
+    static float exponent = 1.75f;
     static float scale = 0.1f;
 
     public static int freeweight = 20;

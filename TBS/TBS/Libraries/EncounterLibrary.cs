@@ -201,7 +201,7 @@ public static class EncounterLibrary
         "BanditAmbush",
         true,
         "Bandits jump out from behind the trees!",
-        new List<Enemy> { EnemyLibrary.Thug, EnemyLibrary.Thug, EnemyLibrary.Thug, EnemyLibrary.Healer},
+        new List<Enemy> { EnemyLibrary.Thug, EnemyLibrary.Thug, EnemyLibrary.Healer},
         null,
         EncounterType.Combat
     );
