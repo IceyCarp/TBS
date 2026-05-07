@@ -139,7 +139,14 @@ public static class AttackLibrary
         new AttackEffect("dodge", -30, 3, "enemy"),   
         new AttackEffect("dodgeNegation", -20, 3, "enemy")    
     });
-        public static Attack IronFist = new Attack("Iron Fist", new List<AttackEffect> {
+
+    public static Attack CrossBowShot = new Attack("CrossBow Shot", new List<AttackEffect> {
+        new AttackEffect("damage", 20, 0, "enemy"),
+        new AttackEffect("speed", -5, 1, "enemy"),
+        new AttackEffect("dodgeNegation", -20, 3, "enemy")
+    });
+
+    public static Attack IronFist = new Attack("Iron Fist", new List<AttackEffect> {
         new AttackEffect("damage", 15, 0, "enemy"),
         new AttackEffect("armor", -5, 3, "enemy")
     }, ClassLibrary.Brawler);

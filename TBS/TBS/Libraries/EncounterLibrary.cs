@@ -422,6 +422,33 @@ public static class EncounterLibrary
     EncounterType.Combat
     );
 
+    public static Encounter RotWalkerHorde = new Encounter(
+    "RotWalkerHorde",
+    true,
+    "you find yourself in the middle of a Horde of RotWalkers",
+    new List<Enemy> { EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker,
+        EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker, EnemyLibrary.rotWalker,EnemyLibrary.rotWalker,EnemyLibrary.rotWalker,EnemyLibrary.rotWalker },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter CaravanAmbush = new Encounter(
+    "CaravanAmbush",
+    true,
+    "You find yourself in the way of a traveling caravan\nthey take offence and launch an attack",
+    new List<Enemy> { EnemyLibrary.CaravanGuard, EnemyLibrary.CaravanGuard, EnemyLibrary.CrossbowMercenary },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter CaravanTrap = new Encounter(
+    "CaravanTrap",
+    true,
+    "You see an abandoned caravan, as you approach you are suddenly under attack",
+    new List<Enemy> { EnemyLibrary.CaravanGuard, EnemyLibrary.Thug, EnemyLibrary.CrossbowMercenary, EnemyLibrary.CrossbowMercenary },
+    null,
+    EncounterType.Combat
+    );
 
     #endregion
 
