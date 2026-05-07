@@ -138,6 +138,15 @@ public static class AttackLibrary
     new AttackEffect("damage", 40, 0, "enemy"),
     new AttackEffect("speed", -6, 3, "self")
 }, ClassLibrary.Brawler);
+
+    public static Attack KingsCut = new Attack("King's Cut", new List<AttackEffect> {
+        new AttackEffect("damage", 50, 0, "enemies"),
+        new AttackEffect("armor", -999, 0, "enemies"),
+        new AttackEffect("dodge", -999, 0, "enemies")
+    });
+
+
+
     #endregion
 
 

@@ -2474,6 +2474,16 @@ public class SubLocation
     async Task SwordInStoneLogic()
     {
         MainUI.ClearMainArea();
+        if (Program.player.HasStat("PlayerHasGottenExcSword"))
+        {
+            MainUI.WriteInMainArea("you enter the clearing that once gifted you such great a gift \nthe empty stone forever a reminder of how grateful you are");
+
+            MainUI.WriteInMainArea("Press enter when you're ready to leave");
+            Console.ReadLine();
+
+            Program.MainMenu();
+            return;
+        }
         MainUI.WriteInMainArea("upon entering the clearing you lay eyes upon a sword \nit's beautiful, an almost magical aura surrounding it \n" +
             "you walk up to it, its just as beautiful up close \nthe blade looks sharp, you find yourself wishing it was yours \n" +
             "all you need to do is pull it from the stone in which it resides");
@@ -2536,6 +2546,8 @@ public class SubLocation
                 }
                 if(fails >= 3)
                 {
+                    Program.player.IncrementStat("PlayerWorthyOfSword", -2);
+                    Program.SavePlayer();
                     MainUI.WriteInMainArea("you aren't worthy");
                     Thread.Sleep(3000);
 
@@ -2545,7 +2557,9 @@ public class SubLocation
                 else
                 {
                     MainUI.WriteInMainArea("you've acquired the legendary sword Excalibur");
-                    //give sword (missing)
+
+                    Inventory.AddItem(ItemLibrary.Excalibur, 1);
+
                     Program.player.IncrementStat("PlayerHasGottenExcSword");
                     Program.SavePlayer();
 

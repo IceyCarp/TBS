@@ -171,7 +171,7 @@
     #endregion
 
     #region artifacts
-    public static Item VampireRing = new Item("Vampire Ring", "+4% CritChance", 11,1, ItemType.Artifact)
+    public static Item VampireRing = new Item("Vampire Ring", "+4% CritChance", 11, 1, ItemType.Artifact)
     {
         detailsLore = "Silver ring rumored to strengthen \nits wearer’s blood using magic.",
         stats = { ["critChance"] = 4 },
@@ -182,15 +182,15 @@
         stats = { ["materialCapacity"] = 50 },
         detailsLore = "A sturdy canvas backpack. Increases how many materials you can carry without weighing you down."
     };
-    public static Item SilverfallAmulet = new Item("Silverfall Amulet", "+5 maxHP, +3% critChance", 12,1, ItemType.Artifact)
+    public static Item SilverfallAmulet = new Item("Silverfall Amulet", "+5 maxHP, +3% critChance", 12, 1, ItemType.Artifact)
     {
-        stats = { ["maxHP"] = 5, ["critChance"] = 3},
-        detailsLore = "Old amulet with a tiny silver waterfall engraved\n hums faintly with magic" 
+        stats = { ["maxHP"] = 5, ["critChance"] = 3 },
+        detailsLore = "Old amulet with a tiny silver waterfall engraved\n hums faintly with magic"
     };
     public static Item MoonveilSigil = new Item("Moonveil Sigil",
     "+10% dodge", 120, 3, ItemType.Artifact)
     {
-        stats = { ["dodge"] = 10},
+        stats = { ["dodge"] = 10 },
         detailsLore = "An etched sigil that shimmers with soft moonlight, \nshifting the bearer away from danger."
     };
     public static Item WindspiritCharm = new Item("Windspirit Charm",
@@ -210,20 +210,20 @@
     #region equipment
 
     #region head
-    public static Item baseballCap = new Item("Baseball Cap", "+1 armor", 5,2, ItemType.Equipment)
+    public static Item baseballCap = new Item("Baseball Cap", "+1 armor", 5, 2, ItemType.Equipment)
     {
-        stats = { ["armor"] = 1},
+        stats = { ["armor"] = 1 },
         equipmentType = EquipmentType.Head,
         detailsLore = "cool Cap.. somehow makes it harder to punch your head off"
     };
-    public static Item knightHelmet = new Item("Knight Helmet", "+3 armor, -1 speed",7,10,ItemType.Equipment)
+    public static Item knightHelmet = new Item("Knight Helmet", "+3 armor, -1 speed", 7, 10, ItemType.Equipment)
     {
-        stats = { ["armor"] = 3, ["speed"] = -1},
+        stats = { ["armor"] = 3, ["speed"] = -1 },
         equipmentType = EquipmentType.Head,
         detailsLore = "heavy knight helmet.. makes it much harder to cut your head off, \nbut its a little too heavy to move properly in"
     };
 
-    public static Item VampireMask = new Item("Vampire Mask", "+20% stun", 23,4, ItemType.Equipment)
+    public static Item VampireMask = new Item("Vampire Mask", "+20% stun", 23, 4, ItemType.Equipment)
     {
         stats = { ["stun"] = 20 },
         equipmentType = EquipmentType.Head,
@@ -237,13 +237,13 @@
         detailsLore = "A delicate circlet that gives insight into enemy motions, reducing their chance to evade."
     };
 
-    public static Item FallenGuardHelmet = new Item("Fallen Guard's Helmet", "+5 maxHP, +2 Armor...", 14,9, ItemType.Equipment)
+    public static Item FallenGuardHelmet = new Item("Fallen Guard's Helmet", "+5 maxHP, +2 Armor...", 14, 9, ItemType.Equipment)
     {
         stats = { ["maxHP"] = 5, ["armor"] = 2, ["stunNegation"] = 1 },
         equipmentType = EquipmentType.Head,
         detailsLore = "Cracked iron helmet of a long dead town guard"
     };
-    public static Item TatteredHat = new Item("Tattered Hat", "+1 armor, +1 dodge", 5,3, ItemType.Equipment)
+    public static Item TatteredHat = new Item("Tattered Hat", "+1 armor, +1 dodge", 5, 3, ItemType.Equipment)
     {
         stats = { ["armor"] = 1, ["dodge"] = 1 },
         equipmentType = EquipmentType.Head,
@@ -252,13 +252,13 @@
     #endregion
 
     #region torso
-    public static Item constructionVest = new Item("Construction Vest", "+2 armor, -40% dodge",6,5,ItemType.Equipment)
+    public static Item constructionVest = new Item("Construction Vest", "+2 armor, -40% dodge", 6, 5, ItemType.Equipment)
     {
         stats = { ["armor"] = 2, ["dodge"] = -40 },
         equipmentType = EquipmentType.Torso,
         detailsLore = "a bright yellow construction vest... \ndefends you a bit, but its hard to dodge in"
     };
-    public static Item CloakofDusk = new Item("Cloak of Dusk", "+1 speed, +40% dodge", 35,6, ItemType.Equipment)
+    public static Item CloakofDusk = new Item("Cloak of Dusk", "+1 speed, +40% dodge", 35, 6, ItemType.Equipment)
     {
         stats = { ["speed"] = 1, ["dodge"] = 40 },
         equipmentType = EquipmentType.Torso,
@@ -272,7 +272,7 @@
     };
     public static Item ExpeditionVest = new Item("Expedition Vest", "+10 maxHP, +2 speed", 20, 13, ItemType.Equipment)
     {
-        stats ={ ["maxHP"] = 10, ["speed"] = 2 },
+        stats = { ["maxHP"] = 10, ["speed"] = 2 },
         equipmentType = EquipmentType.Torso,
         detailsLore = "A vest made of tough canvas. \nIt's light enough to enhance movement",
     };
@@ -285,7 +285,7 @@
     #endregion
 
     #region legs
-    public static Item camoPants = new Item("Camo Pants", "+20% dodge", 5,2, ItemType.Equipment)
+    public static Item camoPants = new Item("Camo Pants", "+20% dodge", 5, 2, ItemType.Equipment)
     {
         stats = { ["dodge"] = 20 },
         equipmentType = EquipmentType.Legs,
@@ -295,31 +295,31 @@
     public static Item RoughTrousers = new Item("Rough Trousers", "+1 armor", 4, 2, ItemType.Equipment)
     {
         stats = { ["armor"] = 1 },
-        equipmentType = EquipmentType.Legs, 
+        equipmentType = EquipmentType.Legs,
         detailsLore = "Simple, thick trousers reinforced with leather patches \nThey offer a tiny bit of defense",
     };
     #endregion
 
     #region boots
-    public static Item sandals = new Item("Sandals", "+1 speed", 5,1, ItemType.Equipment)
+    public static Item sandals = new Item("Sandals", "+1 speed", 5, 1, ItemType.Equipment)
     {
         stats = { ["speed"] = 1 },
         equipmentType = EquipmentType.Feet,
         detailsLore = "some nice sandals.. decently fine to run in"
     };
-    public static Item speedBoots = new Item("Speed Boots", "+3 speed", 8,2, ItemType.Equipment)
+    public static Item speedBoots = new Item("Speed Boots", "+3 speed", 8, 2, ItemType.Equipment)
     {
         stats = { ["speed"] = 3 },
         equipmentType = EquipmentType.Feet,
         detailsLore = "some beautiful boots of speed.. really nice to run in"
     };
 
-    public static Item NightStalkerGreaves = new Item("Night Stalker Greaves", "+50% dodgeNegation", 17,4, ItemType.Equipment)
+    public static Item NightStalkerGreaves = new Item("Night Stalker Greaves", "+50% dodgeNegation", 17, 4, ItemType.Equipment)
     {
         stats = { ["dodgeNegation"] = 50 },
         equipmentType = EquipmentType.Feet,
         detailsLore = "Dark greaves that allow for perfect stalking of the pray\n no matter how agile it may be",
-        
+
     };
 
     public static Item MoonleafGreaves = new Item("Moonleaf Greaves", "+20% dodge, +40% dodgeNegation", 80, 8, ItemType.Equipment)
@@ -376,7 +376,7 @@
     #endregion
 
     #region consumables
-    public static Item smallHealthPotion = new Item("Small Health Potion", "+20 Health", 2,2, ItemType.Consumable)
+    public static Item smallHealthPotion = new Item("Small Health Potion", "+20 Health", 2, 2, ItemType.Consumable)
     {
         effects = new List<AttackEffect>()
         {
@@ -385,7 +385,7 @@
         duration = 0,
         detailsLore = "simple health potion, drink it and you regain some health..\n not much but being alive is nice"
     };
-    public static Item bigHealthPotion = new Item("Big Health Potion", "+50 Health", 4,3, ItemType.Consumable)
+    public static Item bigHealthPotion = new Item("Big Health Potion", "+50 Health", 4, 3, ItemType.Consumable)
     {
         effects = new List<AttackEffect>()
         {
@@ -440,7 +440,7 @@
     {
         effects = new List<AttackEffect>()
         {
-            new AttackEffect("dodge", -15, 1, "self"), 
+            new AttackEffect("dodge", -15, 1, "self"),
             new AttackEffect("heal", 15, 0, "self")
         },
         duration = 0,
@@ -450,12 +450,29 @@
     {
         effects = new List<AttackEffect>()
         {
-            new AttackEffect("heal", 10, 0, "self"), 
+            new AttackEffect("heal", 10, 0, "self"),
             new AttackEffect("critDamage", 10, 1, "self")
         },
         duration = 0,
         detailsLore = "A handful of wild berries found deep in the woods, \nThey offer a burst of energy and sharpen the senses.",
     };
-}
 
-#endregion
+
+    #endregion
+
+    #region special/exclusive
+
+    public static Item Excalibur = new Item("Excalibur", "King’s Cut", 0, 5, ItemType.Equipment)
+    {
+        detailsLore = "The legendary sword of myth Excalibur \nknown to give anyone who claims it the rank of king \ntruly a weapon for the greats",
+        equipmentType = EquipmentType.Weapon,
+        weaponAttack = AttackLibrary.KingsCut
+    };
+
+    #endregion
+
+
+
+
+
+}
