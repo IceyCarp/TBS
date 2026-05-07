@@ -385,6 +385,47 @@ public static class EncounterLibrary
 );
     #endregion
 
+    #region Combat Encounters - Wilderness
+
+    public static Encounter SnowWolfPack = new Encounter(
+    "SnowWolfPack",
+    true,
+    "A pack of Snow Wolves emerges from the trees",
+    new List<Enemy> { EnemyLibrary.SnowWolf, EnemyLibrary.SnowWolf },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter SnowElkAndWolf = new Encounter(
+    "SnowElkAndWolf",
+    true,
+    "You come across a Frozen Elk and a snow wolf, they arent friendly",
+    new List<Enemy> { EnemyLibrary.FrozenElk, EnemyLibrary.SnowWolf },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter ColdStalker = new Encounter(
+    "ColdStalker",
+    true,
+    "you've been spottet by an ColdStalker",
+    new List<Enemy> { EnemyLibrary.ColdStalker },
+    null,
+    EncounterType.Combat
+    );
+
+    public static Encounter FrozenElk = new Encounter(
+    "FrozenElk",
+    true,
+    "You come across a Frozen Elk, it isn't friendly",
+    new List<Enemy> { EnemyLibrary.FrozenElk },
+    null,
+    EncounterType.Combat
+    );
+
+
+    #endregion
+
     #region Combat Encounters - Rootbound Empire
 
     public static Encounter ElvenScout = new Encounter(

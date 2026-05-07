@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // Enemy constructor order:
-// name, level, exp, HP, DMG, speed, armor, dodge, dodgeNegation, critChance, critDamage, stun, stunNegation, money
+// name, level, exp, HP, speed, armor, dodge, dodgeNegation, critChance, critDamage, stun, stunNegation, money
 public static class EnemyLibrary
 {
     #region Basic/Starter Enemies
@@ -340,6 +340,59 @@ public static class EnemyLibrary
         materialDrops = new List<MaterialDrop>
         {
             new MaterialDrop(ItemLibrary.MoonstoneShard, 1, 1, 0.3f)
+        }
+    };
+
+    #endregion
+
+    #region wilderness
+    public static Enemy SnowWolf = new Enemy("Snow Wolf",11,85,95,20,1,18,18,170,20,10,35,20)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Bite,
+            AttackLibrary.PoisonBite
+        },
+
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Bite, 65 },
+            { AttackLibrary.PoisonBite, 35 }
+        },
+
+        materialDrops = new List<MaterialDrop>
+        {
+            new MaterialDrop(ItemLibrary.wolfPelt, 1, 4, 0.5f)
+        }
+    };
+    public static Enemy ColdStalker = new Enemy("Cold Stalker", 8, 30, 55, 6, 0, 20, 130, 10, 300, 0, 0, 14)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.WillowShot
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.WillowShot, 100 }
+        },
+        materialDrops = new List<MaterialDrop>
+        {
+            new MaterialDrop(ItemLibrary.Shadowleaf, 1, 2, 0.4f)
+        }
+    };
+    public static Enemy FrozenElk = new Enemy("Frozen Elk", 13, 70, 200, 5, 0, 0, 0, 10, 100, 70, 0, 14)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Ram
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Ram, 100 }
+        },
+        materialDrops = new List<MaterialDrop>
+        {
+            new MaterialDrop(ItemLibrary.ElkHorn, 1, 2, 0.4f)
         }
     };
 

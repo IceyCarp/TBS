@@ -463,7 +463,10 @@ new Dictionary<Encounter, int>
     },
     new Dictionary<Encounter, int>
     {
-        { EncounterLibrary.DireWolfPack, 50}
+        { EncounterLibrary.SnowWolfPack, 50},
+        { EncounterLibrary.SnowElkAndWolf, 30},
+        { EncounterLibrary.ColdStalker, 10},
+        { EncounterLibrary.FrozenElk, 50},
 
     }, null);
     public static Location QuietClearing = new Location("Quiet clearing", new System.Numerics.Vector2(-8, 0), 0, new List<SubLocation>

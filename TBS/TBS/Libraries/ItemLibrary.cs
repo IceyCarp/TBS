@@ -66,6 +66,10 @@
     {
         detailsLore = "",
     };
+    public static Item ElkHorn = new Item("Elk Horn", "The strong horn of an Elk", 30, 8, ItemType.Material)
+    {
+        detailsLore = "",
+    };
 
     public static Item ShadowClaw = new Item("Shadow Claw", "a razor sharp dark claw.", 18, 0, ItemType.Material)
     {

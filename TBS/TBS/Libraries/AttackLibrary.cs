@@ -49,6 +49,11 @@ public static class AttackLibrary
         new AttackEffect("damage", 5, 0, "enemy")
     });
 
+    public static Attack Ram = new Attack("Ram", new List<AttackEffect> {
+        new AttackEffect("damage", 10, 0, "enemy"),
+        new AttackEffect("dodge", -100, 1, "enemy")
+    });
+
     public static Attack VampiricSlash = new Attack("Vampiric Slash", new List<AttackEffect> {
         new AttackEffect("damage", 20, 0, "enemy"),
         new AttackEffect("heal", 10, 0, "self")
@@ -77,8 +82,13 @@ public static class AttackLibrary
     public static Attack Bite = new Attack("Bite", new List<AttackEffect> {
         new AttackEffect("damage", 8, 0, "enemy"),
         new AttackEffect("damage", 5, 3, "enemy"),
-    }); 
-    
+    });
+
+    public static Attack PoisonBite = new Attack("Poison Bite", new List<AttackEffect> {
+        new AttackEffect("damage", 3, 0, "enemy"),
+        new AttackEffect("damage", 5, 6, "enemy"),
+    });
+
     public static Attack Hailstorm = new Attack("Hailstorm", new List<AttackEffect> {
         new AttackEffect("damage", 10, 0, "enemies"),
         new AttackEffect("dodge", -10, 1, "enemies"),
