@@ -22,7 +22,8 @@ public enum SubLocationType
 
     //specific
     TrainingGrounds,
-    crypt
+    crypt,
+    swordInStone
 }
 public class SubLocation
 {
@@ -100,7 +101,8 @@ public class SubLocation
 
         if (type == SubLocationType.crypt) CryptLogic();
 
-
+        if(type == SubLocationType.swordInStone) SwordInStoneLogic();
+             
         // not done---
         if (type == SubLocationType.tavern)
         {
@@ -2453,6 +2455,63 @@ public class SubLocation
 
     #endregion
 
+    #region "SwordInStone"
+
+    void SwordInStoneLogic()
+    {
+        MainUI.ClearMainArea();
+        MainUI.WriteInMainArea("upon entering the clearing you lay eyes upon a sword \nit's beautiful, an almost magical aura surrounding it \n" +
+            "you walk up to it, its just as beautiful up close \nthe blade looks sharp, you find yourself wishing it was yours \n" +
+            "all you need to do is pull it from the stone in which it resides");
+        MainUI.WriteInMainArea("\nDo you attempt to pull it out? (y/n)");
+        string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+
+        if (choice == "y" || choice == "yes")
+        {
+            int rand = new Random().Next(1,101);
+            bool succes = false;
+            if (rand == 1) succes = true;
+
+            MainUI.WriteInMainArea("You grip the hilt of the sword firmly");
+
+            if (succes)
+            {
+                MainUI.WriteInMainArea("it feels natural in your hand, as if it was destined to be yours");
+                MainUI.WriteInMainArea("Press enter when you're ready to pull");
+                Console.ReadLine();
+
+                int fails = 0;
+                
+                while (fails > 3)
+                {
+
+                    MainUI.WriteInMainArea("[PULL] : 1 [STEADY] : 2 [Listen] : 3 [YIELD] : 4");
+
+
+
+                }
+                if(fails < 3)
+                {
+                    //fail
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            MainUI.WriteInMainArea("you leave it be");
+            Thread.Sleep(200);
+
+            Program.MainMenu();
+            return;
+        }
+    }
+
+    #endregion
 
     #endregion
 
