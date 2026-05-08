@@ -450,6 +450,15 @@ public static class EncounterLibrary
     EncounterType.Combat
     );
 
+    public static Encounter TheifAmbush = new Encounter(
+    "TheifAmbush",
+    true,
+    "Theives attack while you were resting",
+    new List<Enemy> { EnemyLibrary.Cutpurse, EnemyLibrary.HighwayMarauder },
+    null,
+    EncounterType.Combat
+    );
+
     #endregion
 
     #region Combat Encounters - Rootbound Empire

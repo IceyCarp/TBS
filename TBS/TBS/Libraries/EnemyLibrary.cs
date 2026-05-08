@@ -438,6 +438,42 @@ public static class EnemyLibrary
         }
     };
 
+    public static Enemy Cutpurse = new Enemy("Cutpurse", 12, 80, 60, 40, 0, 40, 0, 5, 50, 0, 0, 30)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.Slash,
+            AttackLibrary.Slap
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.Slap, 95 },
+            { AttackLibrary.Slash, 5 }
+        },
+        materialDrops = new List<MaterialDrop>
+        {
+            new MaterialDrop(ItemLibrary.goblinEar, 1, 4, 0.6f),
+            new MaterialDrop(ItemLibrary.iron, 1, 2, 0.3f),
+            new MaterialDrop(ItemLibrary.rock, 1, 3, 0.7f),
+            new MaterialDrop(ItemLibrary.fish, 1, 5, 1f),
+            new MaterialDrop(ItemLibrary.ShadowClaw, 1, 2, 0.3f),
+            new MaterialDrop(ItemLibrary.Shadowleaf, 1, 2, 0.2f),
+            new MaterialDrop(ItemLibrary.frostCore, 1, 2, 0.02f),
+        }
+    };
+
+    public static Enemy HighwayMarauder = new Enemy("Highway Marauder", 10, 80, 130, 5, 3, 0, 50, 50, 50, 0, 0, 0)
+    {
+        attacks = new List<Attack>
+        {
+            AttackLibrary.RecklessSwing
+        },
+        attackWeights = new Dictionary<Attack, int>
+        {
+            { AttackLibrary.RecklessSwing, 100 }
+        }
+    };
+
     #endregion
 
     #region misc
