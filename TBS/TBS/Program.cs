@@ -187,10 +187,10 @@ namespace Game.Class
                 Console.WriteLine();
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
-                
+
                 player.HP = 0;
                 player.SetStat("isInCombat", 0);
-                db.SavePlayer(player);
+                db.SavePlayer(player).GetAwaiter().GetResult();
                 CheckPlayerDeath();
             }
             MainMenu();
@@ -640,12 +640,15 @@ namespace Game.Class
         {
             try
             {
+                player.SetStat("isInCombat", 0);
+                player.isDead = true;
                 player.SetOnline(false);
                 db.MarkPlayerAsDead(player);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error saving dead player: {ex.Message}");
+                try { db.SavePlayer(player).GetAwaiter().GetResult(); } catch { }
             }
 
             idleCheckCancellation?.Cancel();

@@ -295,11 +295,11 @@ public class CombatManager
         
         CompanionSystem.SaveCompanions(player, companionsAfterCombat);
         CompanionSystem.RemoveDeadCompanions(player);
-        
+
         player.SetStat("isInCombat", 0);
         playerInCombat = false;
-        Program.SavePlayer();
-        
+        Program.SavePlayer().GetAwaiter().GetResult();
+
         // Check if player died
         Program.CheckPlayerDeath();
 
