@@ -32,7 +32,7 @@ public class Player : Combatant
 
     //the different things the player knows for the encyclopedia
     public List<Item> knownItems = new List<Item>();
-    public List<Item> knownEnemies = new List<Item>();
+    public List<Enemy> knownEnemies = new List<Enemy>();
 
     public Item? equippedWeapon;
 

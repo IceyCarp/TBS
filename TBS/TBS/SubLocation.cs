@@ -25,6 +25,7 @@ public enum SubLocationType
     //specific
     TrainingGrounds,
     crypt,
+    huntersCache,
     swordInStone
 }
 public class SubLocation
@@ -104,6 +105,8 @@ public class SubLocation
         if (type == SubLocationType.crypt) CryptLogic();
 
         if(type == SubLocationType.swordInStone) SwordInStoneLogic().Wait();
+
+        if (type == SubLocationType.huntersCache) HuntersCacheLogic();
 
         // not done---
         if (type == SubLocationType.tavern)
@@ -2622,6 +2625,63 @@ public class SubLocation
 
     #endregion
 
+    #region HuntersCache
+    void HuntersCacheLogic()
+    {
+        var player = Program.player;
+        int wins = player.GetStat("multiEnemyWins");
+        bool isRanger = player.playerClass?.name == ClassLibrary.Ranger.name;
+        bool hasVolley = player.ownedAttacks.Any(a => a.name == "Volley");
+
+        MainUI.ClearMainArea();
+        MainUI.WriteInMainArea("A weathered stone marker stands between the ruins.");
+        MainUI.WriteInMainArea("Arrows are carved into it. Dozens of them. Tallies.");
+        Thread.Sleep(1500);
+
+        if (isRanger && hasVolley)
+        {
+            MainUI.WriteInMainArea("\nYou've already taken everything this place had to offer.");
+            MainUI.WriteInMainArea("The tallies feel like they belong to you now.");
+        }
+        else if (isRanger && !hasVolley)
+        {
+            MainUI.WriteInMainArea($"\nYou are a Ranger. The marker recognises you.");
+            MainUI.WriteInMainArea($"Multi-enemy wins: {wins}/10  |  Level: {player.level}/10");
+            if (wins >= 10 && player.level >= 10)
+            {
+                MainUI.WriteInMainArea("\nThe final tally carves itself as you watch.");
+                MainUI.WriteInMainArea("You feel the rhythm of it — spread, loose, repeat.");
+                new AttackManager(player).LearnAttack(AttackLibrary.Volley);
+            }
+            else
+            {
+                MainUI.WriteInMainArea("\nYou haven't earned the second secret yet.");
+                MainUI.WriteInMainArea("Keep hunting. In numbers.");
+            }
+        }
+        else
+        {
+            MainUI.WriteInMainArea($"\nMulti-enemy wins: {wins}/3  |  Level: {player.level}/5");
+            if (wins >= 3 && player.level >= 5)
+            {
+                MainUI.WriteInMainArea("\nThe marker hums as you approach.");
+                MainUI.WriteInMainArea("Your record speaks. The wilderness knows you.");
+                player.playerClass = ClassLibrary.Ranger;
+                player.RecalculateStats();
+                MainUI.WriteInMainArea("\nYou are now a Ranger.");
+            }
+            else
+            {
+                MainUI.WriteInMainArea("\nThe marker is indifferent to you. Not yet.");
+            }
+        }
+
+        Program.SavePlayer();
+        MainUI.WriteInMainArea("\nPress Enter to leave...");
+        Console.ReadLine();
+        DoSubLocation();
+    }
+    #endregion
     #endregion
 
 

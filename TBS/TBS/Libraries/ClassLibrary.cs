@@ -83,7 +83,7 @@
     {
         description = "Gains slightly more speed per level. Always starts combat.",
         roles = ClassRole.Physical,
-        Tspeed = 2, 
+        TmaxHP = 5
     };
 
     public static readonly Class Merchant = new Class("Merchant")

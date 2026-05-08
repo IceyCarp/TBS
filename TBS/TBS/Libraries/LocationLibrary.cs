@@ -330,7 +330,8 @@ public static class LocationLibrary
         new SubLocation("Mine",SubLocationType.mine)
         {
 
-        }
+        },
+        new SubLocation("Hunter's Cache", SubLocationType.huntersCache) { }
     },
     new Dictionary<Encounter, int>
     {

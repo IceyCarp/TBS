@@ -50,13 +50,17 @@ public class CombatManager
         combatants.AddRange(enemies);
 
         foreach (var combatant in combatants)
+
         {
             combatant.ActionGauge = 0;
             stunnedTurns[combatant] = 0;
             if (combatant.maxHP <= 0) combatant.maxHP = combatant.HP;
             if (combatant.maxHP > 0 && combatant.HP > combatant.maxHP) combatant.HP = combatant.maxHP;
         }
-
+        if (player.playerClass?.name == "Ranger")
+        {
+            player.ActionGauge = ActionThreshold;
+        }
         ui = new CombatUI();
         ui.InitializeConsole();
     }
@@ -210,6 +214,13 @@ public class CombatManager
             {
                 player.healOverTimeEffects.Clear();
             }
+            foreach (var enemy in enemies)
+            {
+                if (!player.knownEnemies.Any(e => e.name == enemy.name))
+                    player.knownEnemies.Add(enemy);
+            }
+            if (enemies.Count >= 3)
+                player.IncrementStat("multiEnemyWins");
             ui.AddToLog("--- VICTORY! ---");
             string rewardText = $"Rewards: +{totalExp} EXP, +{totalMoney} Rai";
             if (materialRewards.Count > 0)

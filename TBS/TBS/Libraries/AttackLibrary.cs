@@ -166,6 +166,9 @@ public static class AttackLibrary
         new AttackEffect("dodge", 25, 2, "self"),
         new AttackEffect("speed", -3, 2, "enemy")
     });
+    public static Attack Volley = new Attack("Volley", new List<AttackEffect> {
+        new AttackEffect("damage", 15, 0, "enemies"),
+    }, ClassLibrary.Ranger);
 
 
 
