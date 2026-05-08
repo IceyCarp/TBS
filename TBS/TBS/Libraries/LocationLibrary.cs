@@ -76,7 +76,6 @@ public static class LocationLibrary
         { EncounterLibrary.FoundTreasure, 25},
         { EncounterLibrary.StrangeMushrooms, 20},
         { EncounterLibrary.WanderingMerchant, 15},
-        { EncounterLibrary.ChaosSignpost, 83456 },
         { EncounterLibrary.FallenIntoTrap, 10},
         { EncounterLibrary.FallingFish, 10},
         { EncounterLibrary.LostChild, 5}
